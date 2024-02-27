@@ -1,4 +1,67 @@
 *==============================================================================
+*  6.2.1.1 Choice of multifactor productivity
+*==============================================================================
+*  6.2.1.1.1 Input for multifactor productivity
+*==============================================================================
+* Multifactor productivity is retrieved from a model BAU solution with
+* endogenous A_VA(z,time) in equation 3, and exogenous real GDPs, fixed at
+* values that are projected using Four?, Benassy-Qu?r? and Fontagn? projected
+* growth rates. So the solution is forced to follow the GDP projected growth
+* paths. The solution values of A_VA are stored as parameter A_VA_RES.
+*-------------------------------------------------------------------------------
+
+PARAMETER
+ A_VA_RES(z,time)     Value of A_VA to reproduce real GDP projections
+ GX(z,time)           Current government expenditures on goods and services in region z
+ G_REALX(z,time)      Current real government expenditures on goods and services in region z
+ INDX(k,j,z,time)     Volume of new type k capital investment to industry j in region z
+ sh0X(z,time)     Intercept (household savings)
+ sh1X(z,time)     Household savings rate
+;
+
+$GDXIN Input_w-t\B_line_240219.gdx
+*$LOAD A_VA_RES, sh0X, sh1X, GX, G_REALX, INDX
+$LOAD A_VA_RES, GX, G_REALX, INDX, sh1X, sh0X
+
+display  A_VA_RES;
+*$EXIT
+
+*==============================================================================
+*  6.2.1.1.2 Choice of multifactor productivity
+*==============================================================================
+* If you want to reproduce the real GDP projections, set:
+ A_VA.FX(z,time)  = A_VA_RES(z,time);
+* Otherwise, simply put A_VA equal to one:
+* A_VA.FX(z,time)    = 1;
+
+*==============================================================================
+*   6.2.1.2 Choice of reference region
+*==============================================================================
+* By default, the reference region is USA,
+ zr(z)           = no;
+ zr('07_NAM')    = yes;
+*zr('ChinaHK')   = yes;
+ z1(z)           = NOT[zr(z)];
+
+*==============================================================================
+*   6.2.1.3 Choice between closures FE and FP
+*==============================================================================
+*$ontext
+* FP CLOSURE: fixed PIXGDPs; numeraire is exchange rate of reference region
+* The exchange rates are endogenous, except for the reference region.
+ e.FX(zr,time)      = eO(zr);
+ PIXGDP.FX(z,time)  = PIXGDPO(z)/sum(zr,eO(zr));
+*$offtext
+
+$ontext
+* FE CLOSURE: fixed exchange rates; numeraire is PIXGDP of reference region
+* The exchange rates can be fixed at arbitrary values
+ PIXGDP.FX(zr,time)  = PIXGDPO(zr);
+ e.FX(z,time)        = eO(z);
+$offtext
+
+
+*==============================================================================
 *   Taking account of the existence or not of a feasible solution
 *==============================================================================
 PARAMETER
@@ -171,9 +234,17 @@ $offtext
 *   CTAX
 *============================================================================== 
 
- CTAX.fX(z,t1)       = CTAX0(z);
+ CTAX.fX(z,t1)              = CTAX0(z);
  CTAX.fx(z,time)$[ord(time) gt 1]
-                     = CTAX1(z,time);  
+                            = CTAX_145(z,time);  
+
+ CTAX.fX('01_KOR',t1)       = CTAX0('01_KOR');
+ CTAX.fx('01_KOR',time)$[ord(time) gt 1]
+                            = CTAX_425('01_KOR',time);  
+
+* CTAX.fX('03_JPN',t1)       = CTAX0('03_JPN');
+* CTAX.fx('03_JPN',time)$[ord(time) gt 1]
+*                            = CTAX_565('03_JPN',time);  
 
 * CTAX.fX('01_KOR',t1)       = CTAX0('01_KOR');
 * CTAX.fx('01_KOR',time)$[ord(time) gt 1]
@@ -181,7 +252,6 @@ $offtext
 
 * CTAX.fx('01_KOR',time)$[ord(time) gt 3]
 *                            =0.2;
-
 
 *  ttip.fx('31_SER','01_KOR',time)$[ord(time) gt 1]
 *                        = ttip.L('31_SER','01_KOR',time-1)*(1+0.01) ;

@@ -144,7 +144,7 @@ J2(J) Industries
 * 10_PETROLCOAL  Petroleum and coal products
  11_CHEMICAL    Chemical products
  12_NONMET      Non-metallic mineral products
- 13_IRONSTL     Primary iron and steel products
+* 13_IRONSTL     Primary iron and steel products
  14_NONFERR     Non-ferrous metal products
  15_MACHINE     Fabricated metal products Electronic and electrical equipment Machinery and equipment
  16_TRANSEQ     Motor vehicles Other transport equipment
@@ -172,6 +172,7 @@ J3(J) Energy Industries
  04_GAS         Natural gas Gas distribution
  05_MINING      Mined and quarried goods
  10_PETROLCOAL  Petroleum and coal products
+ 13_IRONSTL     Primary iron and steel products
  18_TnD         Transmission and Distribution
  19_eNuclear    Nuclear generation
  20_eCoal       Coal generation

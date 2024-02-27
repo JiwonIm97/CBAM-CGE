@@ -143,7 +143,7 @@ J2(J) Industries
 * 10_PETROLCOAL  Petroleum and coal products
  11_CHEMICAL    Chemical products
  12_NONMET      Non-metallic mineral products
- 13_IRONSTL     Primary iron and steel products
+* 13_IRONSTL     Primary iron and steel products
  14_NONFERR     Non-ferrous metal products
  15_MACHINE     Fabricated metal products Electronic and electrical equipment Machinery and equipment
  16_TRANSEQ     Motor vehicles Other transport equipment
@@ -171,6 +171,7 @@ J3(J) Energy Industries
  04_GAS         Natural gas Gas distribution
  05_MINING      Mined and quarried goods
  10_PETROLCOAL  Petroleum and coal products
+ 13_IRONSTL     Primary iron and steel products
  18_TnD         Transmission and Distribution
  19_eNuclear    Nuclear generation
  20_eCoal       Coal generation
@@ -413,7 +414,11 @@ PARAMETER
  exogro(z,time)       Exogenous growth factor for exogenously growing variables except labor
  growthz(z)           Steady state grwoth
  AEEI(z,time)
- CTAX1(z,time)
+
+ CTAX_145(z,time)
+ CTAX_285(z,time)
+ CTAX_425(z,time)
+ CTAX_565(z,time)
 *==============================================================================
 *  2.2 Variables - Benchmark
 *==============================================================================
@@ -577,7 +582,7 @@ Scalar
 *  includes data for some variables and substitution elasticities.
 
 $LOAD CO, CGO, DDO, DEPO, DIO, DSO, DSO_I, EXO, IMO, INVO, KSTO, LDO, MRGNO, XSO, XSO_I, XSTO,
-$LOAD g_GDP, g_POP, AEEI, CTAX1, RKDO, TDHO, TICO, TIKO, TIMO, TIPO, TIWO, TIXO, 
+$LOAD g_GDP, g_POP, AEEI, CTAX_145, CTAX_285, CTAX_425, CTAX_565, RKDO, TDHO, TICO, TIKO, TIMO, TIPO, TIWO, TIXO, 
 $LOAD tmrg, sigma_M1, sigma_M2, sigma_VA, POPO
 
 display sigma_M1, sigma_M2 ;
@@ -1445,9 +1450,11 @@ display  EGINucGWh, EGICoalGWh, EGIGasGWh, EGIOilGWh, EGIWindGWh, EGISolarGWh, E
 *  4.12 CO2FACTOR and CTAX
 *==============================================================================
 Parameters
- CO2FACTOR(ene,j,z)     CO2 emissions factor (tCO2 per 100$)
- CTAX0(z)               initial Carbon tax $ per ton CO2
- TCTAX0(z)              initial Government Revenue from Carbon tax
+ CO2FACTOR(ene,j,z)       CO2 emissions factor (tCO2 per 100$)
+ CO2FACTOR2(ene,j,z,time) Time series CO2 emissions factor (tCO2 per 100$)
+ CTAX0(z)                 initial Carbon tax $ per ton CO2
+ TCTAX0(z)                initial Government Revenue from Carbon tax
+
 ;
 
  CO2FACTOR(ene,j,z) = 0 ;
@@ -1460,10 +1467,14 @@ Parameters
  CO2FACTOR('10_PETROLCOAL','10_PETROLCOAL',z) = 0;
 
  CTAX0(z) = 0 ;
+
  TCTAX0(z) = 0;
 
+* CO2FACTOR2(ene,j,z,time) = CO2FACTOR(ene,j,z)*AEEI(z,time);
+ CO2FACTOR2(ene,j,z,time) = CO2FACTOR(ene,j,z);
+
 execute_unload 'CO2FACTOR_w-t',
- CO2FACTOR ;
+ CO2FACTOR, CO2FACTOR2 ;
 
 *$exit
 
@@ -1815,7 +1826,7 @@ EQUATIONS
 
  EQ9_1(ene,j3,z,t)..  DE(ene,j3,z,t) =e= aij2(ene,j3,z)*CE(j3,z,t) ;
 
- EQ9_2(ene,j2,z,t)..  DE(ene,j2,z,t) =e= [beta_ENER(ene,j2,z)*PCE(j2,z,t)/((P4(ene,j2,z,t)+PC(ene,z,t)*CTAX(z,t)*CO2FACTOR(ene,j2,z)))]
+ EQ9_2(ene,j2,z,t)..  DE(ene,j2,z,t) =e= [beta_ENER(ene,j2,z)*PCE(j2,z,t)/((P4(ene,j2,z,t)+PC(ene,z,t)*CTAX(z,t)*CO2FACTOR2(ene,j2,z,t)))]
                                    **sigma_ENER(j2,z)*B_ENER(j2,z)**(sigma_ENER(j2,z)-1)
                                    *CE(j2,z,t);
 
@@ -1843,7 +1854,7 @@ EQUATIONS
 *==============================================================================
  EQ16(z,t)..       YG(z,t) =e= TDH(z,t)+TPRODN(z,t)+TPRCTS(z,t)+TCTAX(z,t);
 *TCTAX(z,t)
- EQ16_1(z,t)..     TCTAX(z,t) =e= sum((ene,j), PC(ene,z,t)*CTAX(z,t)*CO2FACTOR(ene,j,z)*DE(ene,j,z,t));
+ EQ16_1(z,t)..     TCTAX(z,t) =e= sum((ene,j), PC(ene,z,t)*CTAX(z,t)*CO2FACTOR2(ene,j,z,t)*DE(ene,j,z,t));
 
  EQ17(z,t)..       TPRODN(z,t) =e= TIWT(z,t)+TIKT(z,t)+TIPT(z,t);
 
@@ -2018,7 +2029,7 @@ $OFFTEXT
 
  EQ51(j,z,t)..     PCI(j,z,t)*CI(j,z,t) =e= SUM[nene,PC(nene,z,t)*DI(nene,j,z,t)];
 
- EQ51_1(j,z,t)..   PCE(j,z,t)*CE(j,z,t) =e= SUM[ene,PC(ene,z,t)*DE(ene,j,z,t) + PC(ene,z,t)*CTAX(z,t)*CO2FACTOR(ene,j,z)*DE(ene,j,z,t)];
+ EQ51_1(j,z,t)..   PCE(j,z,t)*CE(j,z,t) =e= SUM[ene,PC(ene,z,t)*DE(ene,j,z,t) + PC(ene,z,t)*CTAX(z,t)*CO2FACTOR2(ene,j,z,t)*DE(ene,j,z,t)];
 
 * EQ51_1(j,z)..   PCE(j,z)*CE(j,z) =e= SUM[ene,P4(ene,j,z)*DE(ene,j,z)];
 
@@ -2214,11 +2225,15 @@ $OFFTEXT
 * Eliminating display of solution makes it easier to check whether model solves
 * and to identify year when it crashes.
 option limrow=0, limcol=0, solprint = off;
+$Offlisting
+$Offsymlist
+$Offinclude 
 *option limrow=0, limcol=0, iterlim= 100 ;
 *option reslim = 1000;
 
 MODEL PEPWT World wide dynamic model /all/ ;
 PEPWT.holdfixed=1;
+*$EXIT
 
 *==============================================================================
 *  6.1 Scenarios
@@ -2238,8 +2253,8 @@ SCEN  List of scenarios
 *==============================================================================
 *  6.2 BAU scenario and Results
 *==============================================================================
-$INCLUDE BAU_SOLVE_240219.gms
-$INCLUDE BAU_RESULTS_240219.gms
+*$INCLUDE BAU_SOLVE_240219.gms
+*$INCLUDE BAU_RESULTS_240219.gms
 
 * The user may run the BAU scenario with the command line parameter s=bau
 * to save the solution and exit at this point.

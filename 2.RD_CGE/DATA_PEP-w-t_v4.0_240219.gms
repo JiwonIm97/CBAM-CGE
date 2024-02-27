@@ -1086,12 +1086,15 @@ PARAMETER
  TOT_POP(z,time)         Total population from 1980 to 2050 based on the PEP w aggregation
  TOT_POP_GTAP8(reg,time) Total population from 1980 to 2050 based on the GTAP8 aggregation
  AEEI(z,time)            Autonomous energy efficiency improvement
- CTAX1(z,time)
+ CTAX_145(z,time)
+ CTAX_285(z,time)
+ CTAX_425(z,time)
+ CTAX_565(z,time)
 ;
 
 $call gdxxrw Input_w-t\240125_Projection.xlsx @Input_w-t\Projection.txt trace=0 output=Input_w-t\240125_Projection 
 $gdxIn Input_w-t\240125_Projection.gdx
-$load GDP, TOT_POP, AEEI, CTAX1
+$load GDP, TOT_POP, AEEI, CTAX_145, CTAX_285, CTAX_425, CTAX_565
 
 *==============================================================================
 * 4.1 Real GDP projections
@@ -1154,4 +1157,4 @@ execute_unload 'Input_w-t\DATA_AGG-2019_240125_w-t.gdx',
  sigma_M1, sigma_M2, sigma_VA,Q_GTAP, SH_Q, ESUBD, DDO_Matrix
 
 *Parameters used in PEP w-t only
- g_GDP, g_POP, AEEI, CTAX1 ;
+ g_GDP, g_POP, AEEI, CTAX_145, CTAX_285, CTAX_425, CTAX_565 ;
