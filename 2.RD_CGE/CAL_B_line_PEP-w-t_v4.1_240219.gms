@@ -640,7 +640,7 @@ eta = 1;
 PARAMETER
 PARZ;
 
-$CALL gdxxrw Input_w-t/JointB_VAL_230411_PAR.xls @JointB_POWER_PAR.txt Rdim=2 Cdim=1 output=Input_w-t/JointB_VAL_230411_PAR.gdx
+$CALL gdxxrw Input_w-t/JointB_VAL_230411_PAR.xls @Input_w-t/JointB_POWER_PAR.txt Rdim=2 Cdim=1 output=Input_w-t/JointB_VAL_230411_PAR.gdx
 $GDXIN Input_w-t/JointB_VAL_230411_PAR.gdx
 $LOAD sigma_KD, sigma_LD, sigma_KLE, sigma_X1, sigma_X2, sigma_X3, sigma_X0, sigma_y, sigma_inv, PARZ
 

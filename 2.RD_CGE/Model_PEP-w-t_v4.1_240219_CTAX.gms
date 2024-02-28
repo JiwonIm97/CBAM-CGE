@@ -2224,10 +2224,14 @@ $OFFTEXT
 
 * Eliminating display of solution makes it easier to check whether model solves
 * and to identify year when it crashes.
+*option profile=1;
+option profile=3;
+*option profiletol=10;
+
 option limrow=0, limcol=0, solprint = off;
-$Offlisting
-$Offsymlist
-$Offinclude 
+*$Offlisting
+*$Offsymlist
+*$Offinclude 
 *option limrow=0, limcol=0, iterlim= 100 ;
 *option reslim = 1000;
 
@@ -2253,8 +2257,8 @@ SCEN  List of scenarios
 *==============================================================================
 *  6.2 BAU scenario and Results
 *==============================================================================
-*$INCLUDE BAU_SOLVE_240219.gms
-*$INCLUDE BAU_RESULTS_240219.gms
+$INCLUDE BAU_SOLVE_240219.gms
+$INCLUDE BAU_RESULTS_240219.gms
 
 * The user may run the BAU scenario with the command line parameter s=bau
 * to save the solution and exit at this point.
@@ -2264,7 +2268,7 @@ SCEN  List of scenarios
 *==============================================================================
 *   6.3 Simulation scenarios and Results
 *==============================================================================
-$INCLUDE SIM_SOLVE_240219.gms
-$INCLUDE SIM_RESULTS_240219.gms
+*$INCLUDE SIM_SOLVE_240219.gms
+*$INCLUDE SIM_RESULTS_240219.gms
 
 $exit

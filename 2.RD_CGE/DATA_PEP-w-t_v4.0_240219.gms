@@ -34,7 +34,6 @@
 *==============================================================================
 $CALL har2gdx Input_GTAP10DB\basedata2019_230906_POWER3 Input_GTAP10DB\basedata2019.gdx
 $CALL har2gdx Input_GTAP10DB\parameter2019_POWER3.prm Input_GTAP10DB\Parameters2019.gdx
-
 *$EXIT
 *==============================================================================
 * 1. Define the sets
