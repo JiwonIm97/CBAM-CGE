@@ -22,12 +22,6 @@
         },
         {
             "codecMib": 106,
-            "file": "Baseline_Results_240219.gdx",
-            "name": "Baseline_Results_240219.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
             "file": "BAU_RESULTS_240219.gms",
             "name": "BAU_RESULTS_240219.gms",
             "type": "gms"
@@ -46,33 +40,9 @@
         },
         {
             "codecMib": 106,
-            "file": "CAL_B_line_PEP-w-t_v4.1_240219.lst",
-            "name": "CAL_B_line_PEP-w-t_v4.1_240219.lst",
-            "type": "lst"
-        },
-        {
-            "codecMib": 106,
-            "file": "DATA_PEP-w-t_v4.0_240219.gdx",
-            "name": "DATA_PEP-w-t_v4.0_240219.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
             "file": "DATA_PEP-w-t_v4.0_240219.gms",
             "name": "DATA_PEP-w-t_v4.0_240219.gms",
             "type": "gms"
-        },
-        {
-            "codecMib": 106,
-            "file": "DATA_PEP-w-t_v4.0_240219.lst",
-            "name": "DATA_PEP-w-t_v4.0_240219.lst",
-            "type": "lst"
-        },
-        {
-            "codecMib": 106,
-            "file": "Model_PEP-w-t_v4.1_240219_CTAX.gdx",
-            "name": "Model_PEP-w-t_v4.1_240219_CTAX.gdx",
-            "type": "gdx"
         },
         {
             "codecMib": 106,
@@ -85,12 +55,6 @@
             "file": "Model_PEP-w-t_v4.1_240219_CTAX.lst",
             "name": "Model_PEP-w-t_v4.1_240219_CTAX.lst",
             "type": "lst"
-        },
-        {
-            "codecMib": 106,
-            "file": "model_pep-w-t_v4.1_240219_ctax_files.txt",
-            "name": "model_pep-w-t_v4.1_240219_ctax_files.txt",
-            "type": "txt"
         },
         {
             "codecMib": 106,

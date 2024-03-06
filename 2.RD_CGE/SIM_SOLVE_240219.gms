@@ -236,11 +236,13 @@ $offtext
 
  CTAX.fX(z,t1)              = CTAX0(z);
  CTAX.fx(z,time)$[ord(time) gt 1]
-                            = CTAX_145(z,time);  
+*                            = CTAX_145(z,time);  
+                            = CTAX0(z);  
 
  CTAX.fX('01_KOR',t1)       = CTAX0('01_KOR');
  CTAX.fx('01_KOR',time)$[ord(time) gt 1]
-                            = CTAX_425('01_KOR',time);  
+                            = CTAX_145('01_KOR',time);  
+*                            = CTAX_425('01_KOR',time);  
 *                            = CTAX_565('01_KOR',time);  
 
 * CTAX.fX('03_JPN',t1)       = CTAX0('03_JPN');

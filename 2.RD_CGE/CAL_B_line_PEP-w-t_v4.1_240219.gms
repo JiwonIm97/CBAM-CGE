@@ -1343,6 +1343,8 @@ Parameter
 *execute_unload 'GHGs emission',
 *CO2HO, CO2IO, CH4IO, CH4HO, N2OIO, N2OHO
 
+execute_unload 'EQ4_MINING_GTAP10';
+$EXIT
 *==============================================================================
 * 5 Model
 *==============================================================================

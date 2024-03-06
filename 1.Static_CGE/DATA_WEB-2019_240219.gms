@@ -725,7 +725,7 @@ par=GHGsEF         rng=EF!A1:E69
 par=physical_unit  rng=Physical_Unit!A1:B69
 $offEcho
 
-$call  Input_WEB/gdxxrw 230425_WEB19.xlsx @Input_WEB/WEB19.txt trace=0 output=Input_WEB/230425_WEB19.gdx
+$call  gdxxrw Input_WEB/230425_WEB19.xlsx @Input_WEB/WEB19.txt trace=0 output=Input_WEB/230425_WEB19.gdx
 $gdxIn Input_WEB/230425_WEB19.gdx
 $load  WEB_KOR WEB_CHN WEB_JPN WEB_RUS WEB_MNG WEB_PRK WEB_NAM WEB_LAM WEB_WEU WEB_EEU WEB_FSU WEB_MEA WEB_AFR WEB_CPA WEB_SAS WEB_PAS WEB_PAO GHGsEF physical_unit
 

@@ -2823,4 +2823,17 @@ execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP10_231208_CTAX.gdx',
  valYHL
  valYROW
  POPO
+ sigma_KD
+ sigma_LD
+ sigma_M1
+ sigma_M2
+ sigma_VA
+ sigma_KLE
+ sigma_ENER
+ sigma_X0
+ sigma_X1
+ sigma_X2
+ sigma_X3
+ sigma_X4
+ sigma_Y
  ;

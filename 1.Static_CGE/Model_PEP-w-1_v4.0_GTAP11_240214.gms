@@ -136,7 +136,7 @@ J2(J) Industries
 * 02_COAL        Coal
 * 03_OIL         Crude petroleum
 * 04_GAS         Natural gas Gas distribution
- 05_MINING      Mined and quarried goods
+* 05_MINING      Mined and quarried goods
  06_FOODPRO     Food beverages and tobacco products
  07_TEXTILES    Textile and leather products
  08_WOODPRO     Wood products
@@ -172,6 +172,7 @@ J3(J) Energy Industries
  02_COAL        Coal
  03_OIL         Crude petroleum
  04_GAS         Natural gas Gas distribution
+ 05_MINING      Mined and quarried goods
 * 09_PAPERPRO    Paper products
  10_PETROLCOAL  Petroleum and coal products
  18_TnD         Transmission and Distribution
@@ -645,7 +646,7 @@ $LOAD sigma_KD, sigma_LD, sigma_KLE, sigma_X1, sigma_X2, sigma_X3, sigma_X0, sig
 * If the user wishes to assume otherwise, he can fill the appropriate area in
 * the Excel file VAL_PAR.xls and delete following line:
  sigma_LD(j,z)   = 2*sigma_VA(j,z);
-* sigma_LD(j,z)   = 1*sigma_VA(j,z);
+* sigma_LD(j,z)   = 0.5;
 *------------------------------------------------------------------------------
 * CES - composite KLE, KE, ENER
 * sigma_KLE(j,z)  = 0.1 ;
@@ -2494,7 +2495,7 @@ PEPW1.TOLINFREP = 0.0001;
 *SOLVE PEPW1 USING MCP;
 SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
 
-*$exit
+$exit
 *==============================================================================
 * numeraire shock
 *==============================================================================
@@ -2837,4 +2838,19 @@ execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx',
  valYHL
  valYROW
  POPO
+ sigma_KD
+ sigma_LD
+ sigma_M1
+ sigma_M2
+ sigma_VA
+ sigma_KLE
+ sigma_ENER
+ sigma_X0
+ sigma_X1
+ sigma_X2
+ sigma_X3
+ sigma_X4
+ sigma_Y
+
+
  ;
