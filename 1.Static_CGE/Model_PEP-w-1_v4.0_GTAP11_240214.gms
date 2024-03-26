@@ -31,6 +31,7 @@ $STITLE    World wide model, static version, October 2013
 * The sets are defined in the DATA_AGG-2007.gms file and are stored in the
 * DATA_AGG-2007.GDX output file. Any changes in the aggregation of industries
 * and/or region is thus automatically taken into account in the current file.
+
 SET
  J               All industries
  I               All commodities
@@ -49,7 +50,6 @@ SET
 
 $GDXIN Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
 $LOAD J, I, I1, BUS, PUB, F, L, K, Z, ZR, Z1, Zrich, Zother
-
 TND(J) TnD
 /
  18_TnD         Transmission and Distribution
@@ -66,6 +66,7 @@ POWER(J) POWER industries
  25_eHydro      Hydro generation
  26_eOther      Other generation
 /
+
 
 I2(I) Non-electricity commodities
 /
@@ -93,12 +94,12 @@ I2(I) Non-electricity commodities
  22_ATRP        Air transport service
  23_SER         Service
 /
-
+ 
 ENE(I) Energy commodities
 /
  02_COAL         Coal
  03_OIL          Crude petroleum
- 04_GAS         Natural gas
+ 04_GAS          Natural gas
  10_PETROLCOAL   Petroleum and coal products
  18_ELEC         Electricity
 /
@@ -236,6 +237,8 @@ J5(J) Industries
  31_SER         Service
 /
 
+
+
 Z2(Z) NEA countries
 /
  01_KOR Korea
@@ -246,7 +249,8 @@ Z2(Z) NEA countries
  06_PRK Peoples Republic of Korea
 /
 
-sim /1*41/
+*sim /1*41/
+sim/1/
 
 ALIAS (j,jj)
 ALIAS (i,ii,ij)
@@ -1355,6 +1359,10 @@ execute_unload 'CO2FACTOR_w-1_GTAP11',
 
 *Reporting
 PARAMETER
+ valEE_coal_agg(j,z,sim)
+ valEE_natgas(j,z,sim)
+ valEE_crudeoil(j,z,sim)
+ valEE_oilproduct_agg(j,z,sim)
  valEE(product,j,z,sim)
  valNE(product,j,z,sim) 
  valEH(product,z,sim)
@@ -1377,6 +1385,7 @@ PARAMETER
  valCTAX(z,sim)
  valTCTAX(z,sim)
  valPC(i,z,sim)         Purchaser price of composite commodity i (including all taxes and margins) in region z
+ valSH(z,sim)           Household savings in region z
  valSH(z,sim)           Household savings in region z
  valPOWER(power,i,z,sim)
  valKOR_TFC(product,sim)
@@ -1498,7 +1507,6 @@ PARAMETER
  valYROW(z,sim)         Rest-of-the-world total income from region z
 ;
 
-*$EXIT
 *==============================================================================
 * 5 Model
 *==============================================================================
@@ -2495,7 +2503,7 @@ PEPW1.TOLINFREP = 0.0001;
 *SOLVE PEPW1 USING MCP;
 SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
 
-$exit
+*$exit
 *==============================================================================
 * numeraire shock
 *==============================================================================
@@ -2532,6 +2540,10 @@ CTAX.FX('01_KOR') = 0 + 0.1*[ord(sim)]-0.1;
 
 SOLVE PEPW1 USING CNS;
 *SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
+ valEE_coal_agg(j,z,sim) = sum(p_coal_agg, EEI(p_coal_agg,j,z) * DE.L('02_COAL',j,z));
+ valEE_crudeoil(j,z,sim) = sum(p_crudeoil, EEI(p_crudeoil,j,z) * DE.L('03_OIL',j,z));
+ valEE_natgas(j,z,sim) = sum(p_natgas, EEI(p_natgas,j,z) * DE.L('04_GAS',j,z));
+ valEE_oilproduct_agg(j,z,sim) = sum(p_oilproduct_agg, EEI(p_oilproduct_agg,j,z) * DE.L('10_PETROLCOAL',j,z)); 
 
  valEE(p_coal,j,z,sim)          = EEI(p_coal,j,z)*DE.L('02_COAL',j,z);
  valEE(p_oil,j,z,sim)           = EEI(p_oil,j,z)*DE.L('03_OIL',j,z);
@@ -2693,10 +2705,12 @@ SOLVE PEPW1 USING CNS;
  valYROW(z,sim)                 = YROW.l(z);
 
 
-);
 
-execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx',
-
+execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx'
+ valEE_coal_agg
+ valEE_natgas
+ valEE_crudeoil
+ valEE_oilproduct_agg
  valEE
  valNE
  valEH
@@ -2853,4 +2867,4 @@ execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx',
  sigma_Y
 
 
- ;
+ );

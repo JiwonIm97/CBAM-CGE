@@ -382,6 +382,54 @@ p64_HEAT      Heat
 
 /
 
+p_coal_agg(product)
+/p3_ANTCOAL
+p4_COKCOAL
+p5_BITCOAL
+p6_SUBCOAL
+p7_LIGNITE
+p8_PATFUEL
+p9_OVENCOKE
+p10_GASCOKE
+p11_COALTAR
+p12_BKB
+p13_GASWKSGS
+p14_COKEOVGS
+p15_BLFURGS
+p16_OGASES
+/
+
+p_natgas(product)
+/p20_NATGAS
+/
+
+p_crudeoil(product)
+/p22_CRUDEOIL
+/
+
+p_oilproduct_agg(product)
+/
+p23_NGL
+p27_REFINGAS
+p28_ETHANE
+p29_LPG
+p30_NONBIOGASO
+p31_AVGAS
+p33_NONBIOJETK
+p34_OTHKERO
+p35_NONBIODIES
+p36_RESFUEL
+p37_NAPHTHA
+p38_WHITESP
+p39_LUBRIC
+p40_BITUMEN
+p42_PETCOKE
+p43_ONONSPEC
+/
+
+
+
+
 *===========================Flows Mapping====================================
 f_balstfur(flow)
 /
@@ -812,7 +860,7 @@ Parameter
  ElecWindGWh(j,z)    Wind Output GWh 
  ElecHydroGWh(j,z)   Hydro Output GWh
  ElecOtherGWh(j,z)   Other Output GWh
-
+ 
 ;
 *
 

@@ -50,6 +50,7 @@ SET
 $GDXIN Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
 $LOAD J, I, I1, BUS, PUB, F, L, K, Z, ZR, Z1, Zrich, Zother
 
+
 TND(J) TnD
 /
  18_TnD         Transmission and Distribution
@@ -498,13 +499,12 @@ $LOAD sigma_M1, sigma_M2, sigma_VA
 
 
 display sigma_M1, sigma_M2 ;
-
 sigma_M1('04_GAS',Z) = 6;
 sigma_M2('03_OIL',Z) = 6;
 sigma_M2('04_GAS',Z) = 6;
 
 display sigma_M1, sigma_M2 ;
-*$exit
+$exit
 *==============================================================================
 *   3.1.2 Rescaling the variables
 *==============================================================================
@@ -1224,6 +1224,8 @@ display rho_VA, sigma_VA ;
 *==============================================================================
 *  4.9 CO2 emission
 *==============================================================================
+$INCLUDE DATA_WEB-2019_240219.gms
+$INCLUDE DATA_WEB-2019_240219.gms
 $INCLUDE DATA_WEB-2019_240219.gms
 
 Parameter
