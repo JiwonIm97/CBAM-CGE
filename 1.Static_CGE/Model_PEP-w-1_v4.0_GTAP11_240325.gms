@@ -273,13 +273,10 @@ J9(J) Aggregated Transportation
 30_ATRP
 /
 
-***HH 수정
 J10(J) Aggregated Building 
 /31_SER
 /
 
-
-**household consumption parameter summation 추가
 Z2(Z) NEA countries
 /
  01_KOR Korea
@@ -1410,8 +1407,7 @@ PARAMETER
  valEE_ene_agg(product,j,z,sim)
  valEE_manu_agg(product,j,z,sim)
  valEE_trans_agg(product,j,z,sim)
- valEE_bdg_agg(product,j,z,sim) 
-
+ valEE_bdg_agg(product,z,sim)
  valEE(product,j,z,sim)
  valNE(product,j,z,sim) 
  valEH(product,z,sim)
@@ -2617,7 +2613,6 @@ SOLVE PEPW1 USING CNS;
  valEE_trans_agg(p_gas,j9,z,sim) = EEI(p_gas,j9,z)*DE.L('04_GAS',j9,z);
  valEE_trans_agg(p_oilproduct,j9,z,sim) = EEI(p_oilproduct,j9,z)*DE.L('10_PETROLCOAL',j9,z);
  valEE_trans_agg(p_elecheat,j9,z,sim) = EEI(p_elecheat,j9,z)*DE.L('18_ELEC',j9,z);
- 
 
  valEE(p_coal,j,z,sim)          = EEI(p_coal,j,z)*DE.L('02_COAL',j,z);
  valEE(p_oil,j,z,sim)           = EEI(p_oil,j,z)*DE.L('03_OIL',j,z);
@@ -2637,11 +2632,7 @@ SOLVE PEPW1 USING CNS;
  valEH(p_oilproduct,z,sim)      = EHI(p_oilproduct,z)*C.L('10_PETROLCOAL',z);
  valEH(p_elecheat,z,sim)        = EHI(p_elecheat,z)*C.L('18_ELEC',z);
 
- valEE_bdg_agg(p_coal,j,z,sim)  = valEH(p_coal,z,sim) + EEI(p_coal,'31_SER',z)*DE.L('02_COAL','31_SER',z);
- valEE_bdg_agg(p_oil,j,z,sim)   = valEH(p_oil,z,sim) + EEI(p_oil,'31_SER',z)*DE.L('03_OIL','31_SER',z);
- valEE_bdg_agg(p_gas,j,z,sim)   = valEH(p_gas,z,sim) + EEI(p_gas,'31_SER',z)*DE.L('04_GAS','31_SER',z);
- valEE_bdg_agg(p_oilproduct,j,z,sim) = valEH(p_oilproduct,z,sim) + EEI(p_oilproduct,'31_SER',z)*DE.L('10_PETROLCOAL','31_SER',z);
- valEE_bdg_agg(p_elecheat,j,z,sim)   = valEH(p_elecheat,z,sim) + EEI(p_elecheat,'31_SER',z)*DE.L('18_ELEC','31_SER',z);
+ valEE_bdg_agg(product,z,sim)   = valEH(product,z,sim) + Sum(j10,valEE(product,j10,z,sim));
 
  valCO2I(product,j,z,sim)       = valEE(product,j,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  valCO2NE(product,j,z,sim)      = valNE(product,j,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF')*(1-GHGsEF(product,'Stored_rate')) ;
@@ -2795,7 +2786,7 @@ execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx'
  valEE_ene_agg
  valEE_manu_agg
  valEE_trans_agg
- 
+ valEE_bdg_agg
  valEE
  valNE
  valEH
