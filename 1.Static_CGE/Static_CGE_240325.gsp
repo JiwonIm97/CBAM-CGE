@@ -4,6 +4,12 @@
     "nodes": [
         {
             "codecMib": 106,
+            "file": "Input_w-1/DATA_AGG-2019_GTAP11_240214.gdx",
+            "name": "DATA_AGG-2019_GTAP11_240214.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
             "file": "Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx",
             "name": "results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx",
             "type": "gdx"
