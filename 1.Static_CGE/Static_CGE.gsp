@@ -25,6 +25,18 @@
             "file": "Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx",
             "name": "results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx",
             "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.gdx",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
+            "type": "lst"
         }
     ],
     "options": [
