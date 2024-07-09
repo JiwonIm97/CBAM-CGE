@@ -218,7 +218,7 @@ J5(J) Industries
  12_NONMET      Non-metallic mineral products
  13_IRONSTL     Primary iron and steel products
  14_NONFERR     Non-ferrous metal products
- 15_MACHINE     Fabricated metal products Electronic and electrical equipment Machinery and equipment
+ 15_MACHINE     Fabricated metal products Electronic and electrical equipment  Machinery and equipment
  16_TRANSEQ     Motor vehicles Other transport equipment
  17_OTHERIND    Other manufactured products Water supply
 * 18_TnD         Transmission and Distribution
@@ -1286,18 +1286,20 @@ display rho_VA, sigma_VA ;
 *==============================================================================
 *  4.9 CO2 emission
 *==============================================================================
-$INCLUDE DATA_WEB-2019_240219.gms
+$INCLUDE DATA_WEB-2019_240325.gms
 
+***direct emission
 Parameter
- CO2IO(product,j,z) ktCO2 industry j sector
- CO2HO(product,z)   ktCO2 residendital sector
- CH4IO(product,j,z) tCO2eq industry j sector
- CH4HO(product,z)   tCO2eq residendital sector
- N2OIO(product,j,z) tCO2eq industry j sector
- N2OHO(product,z)   tCO2eq residendital sector
+ CO2IO(product,j,z) ktCO2 direct emission for industry j sector
+ CO2HO(product,z)   ktCO2 direct emission for residendital sector
+
+* CH4IO(product,j,z) tCO2eq direct emission for industry j sector
+* CH4HO(product,z)   tCO2eq direct emission for residendital sector
+
+* N2OIO(product,j,z) tCO2eq direct emission for industry j sector
+* N2OHO(product,z)   tCO2eq direct emission for residendital sector
  GWP(type)          GWP 100 AR5
  ;
-
  GWP('CO2EF') = 1;
  GWP('CH4EF') = 28;
  GWP('N2OEF') = 265;
@@ -1305,30 +1307,98 @@ Parameter
  CO2IO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2IO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2IO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z)  = Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
-
+* CO2IO(p_crudeoil,j,z)$Oilp_DIO(p_crudeoil,j,z)  = Oilp_DIO(p_crudeoil,j,z)*41.868*GHGsEF(p_crudeoil,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+ 
  CO2HO(p_coal,z)$Coal_CO(p_coal,z) = Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2HO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2HO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+* CO2HO(p_crudeoil,z)$Oilp_CO(p_crudeoil,z) = Oilp_CO(p_crudeoil,z)*41.868*GHGsEF(p_crudeoil,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
 
- CH4IO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
- CH4IO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
- CH4IO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z) = Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4IO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4IO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4IO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z) = Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4IO(p_crudeoil,j,z)$Oilp_DIO(p_crudeoil,j,z) = Oilp_DIO(p_crudeoil,j,z)*41.868*GHGsEF(p_crudeoil,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
 
- CH4HO(p_coal,z)$Coal_CO(p_coal,z) = Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
- CH4HO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
- CH4HO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
 
- N2OIO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
- N2OIO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
- N2OIO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z)  = Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* CH4HO(p_coal,z)$Coal_CO(p_coal,z) = Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4HO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4HO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
+* CH4HO(p_crudeoil,z)$Oilp_CO(p_crudeoil,z) = Oilp_CO(p_crudeoil,z)*41.868*GHGsEF(p_crudeoil,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
 
- N2OHO(p_coal,z)$Coal_CO(p_coal,z) = Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
- N2OHO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
- N2OHO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
 
-execute_unload 'DIO_wKLEM',
- DEO, DIO ;
+* N2OIO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* N2OIO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* N2OIO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z)  = Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* N2OIO(p_crudeoil,j,z)$Oilp_DIO(p_crudeoil,j,z)  = Oilp_DIO(p_crudeoil,j,z)*41.868*GHGsEF(p_crudeoil,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
  
+
+* N2OHO(p_coal,z)$Coal_CO(p_coal,z) = Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* N2OHO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* N2OHO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+* N2OHO(p_crudeoil,z)$Oilp_CO(p_crudeoil,z) = Oilp_CO(p_crudeoil,z)*41.868*GHGsEF(p_crudeoil,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
+
+
+execute_unload 'DIO_wKLEM', DEO, DIO ;
+
+*** indirect emission
+Parameter
+
+    CO2INDIO(product,j,z)      ktCO2 indirect emissions for industry j in region z
+    CO2INDHO(product,z)        ktCO2 indirect emissions for residential sector in region z
+
+*    CH4IO(product,j,z)  tCO2eq indirect emission for industry j sector
+*    CH4HO(product,z)   tCO2eq indirect emission for residendital sector
+*    N2OIO(product,j,z) tCO2eq indirect emission for industry j sector
+*    N2OHO(product,z)   tCO2eq indirect emission for residendital sector
+    
+    ElecTDIO(z)         Total electricity consumption in region z by all industries
+    ElecRIO(j,z)        Share of electricity used by industry j in total electricity consumption in region z
+    ElecRHO(z)          Share of electricity used by household j in region z
+
+    
+;
+
+ ElecTDIO(z)    = SUM((p_elecheat,j), Elec_DIO(p_elecheat,j,z)); 
+ ElecRIO(j,z)   = SUM(p_elecheat, Elec_DIO(p_elecheat,j,z)) / ElecTDIO(z) ;
+ ElecRHO(z)     = SUM(p_elecheat, Elec_CO(p_elecheat,z))/ ElecTDIO(z) ;
+
+ CO2INDIO(p_coal,j,z)$Coal_DIO(p_coal,j,z) =  ElecRIO(j,z)*Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+ CO2INDIO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  =  ElecRIO(j,z)*Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+ CO2INDIO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z)  =  ElecRIO(j,z)*Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+
+ CO2INDHO(p_coal,z)$Coal_CO(p_coal,z) =  ElecRHO(z)*Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+ CO2INDHO(p_gas,z)$Gas_CO(p_gas,z) =     ElecRHO(z)*Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+ CO2INDHO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = ElecRHO(z)*Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+
+
+****total emission
+
+Parameter
+    CO2TOTALIO(product,j,z)  ktCO2 total emissions for industry j in region z
+    CO2TOTALHO(product,z)    ktCO2 total emissions for residential sector in region z
+*    CH4TOTALIO(product,j,z) "tCO2eq total emissions for industry j in region z"
+*    CH4TOTALHO(product,z)   "tCO2eq total emissions for residential sector in region z"
+*    N2OTOTALIO(product,j,z) "tCO2eq total emissions for industry j in region z"
+*    N2OTOTALHO(product,z)   "tCO2eq total emissions for residential sector in region z"
+    ;
+
+ CO2TOTALIO(product,j,z) = CO2IO(product,j,z) + CO2INDIO(product,j,z);
+ CO2TOTALHO(product,z) = CO2HO(product,z) + CO2INDHO(product,z);
+
+
+*CH4TOTALIO(product,j,z) = CH4IO(product,j,z) + CH4INDIO(product,j,z);
+*CH4TOTALHO(product,z) = CH4HO(product,z) + CH4INDHO(product,z);
+
+
+*N2OTOTALIO(product,j,z) = N2OIO(product,j,z) + N2OINDIO(product,j,z);
+*N2OTOTALHO(product,z) = N2OHO(product,z) + N2OINDHO(product,z);
+
+
+
+***carbon content of a unit of product of sector(CBAM)
+
+
+
 *$EXIT
 
 *==============================================================================
@@ -1372,7 +1442,6 @@ Parameter
  NEO(p_oilproduct,j,z) = NOilp_DIO(p_oilproduct,j,z) ;
 
 
-
  EHO(p_coal,z)         = Coal_CO(p_coal,z) ;
  EHO(p_gas,z)          = Gas_CO(p_gas,z) ;
  EHO(p_oil,z)          = Oil_CO(p_oil,z) ;
@@ -1397,17 +1466,7 @@ Parameters
  CO2FACTOR('04_GAS',j,z)$DEO('04_GAS',j,z) = [sum(p_gas,CO2IO(p_gas,j,z))/DEO('04_GAS',j,z)]*(1000/(10**8));
  CO2FACTOR('10_PETROLCOAL',j,z)$DEO('10_PETROLCOAL',j,z) = [sum(p_oilproduct,CO2IO(p_oilproduct,j,z))/DEO('10_PETROLCOAL',j,z)]*(1000/(10**8));
 
-* CO2FACTOR('02_COAL','17_OTHERIND',z) = 0;
-* CO2FACTOR(ene,'17_OTHERIND',z) = 0;
  CO2FACTOR('10_PETROLCOAL','10_PETROLCOAL',z) = 0;
-* CO2FACTOR(ene,j,'06_PRK') = 0;
-
-* CO2FACTOR('10_PETROLCOAL',j,z)$DEO('10_PETROLCOAL',j,z) = sum(p_oilproduct,CO2IO(p_oilproduct,j,z))/ DEO('10_PETROLCOAL',j,z) ;
-* 02_COAL         Coal
-* 03_OIL          Crude petroleum
-* 04_GAS          Natural gas
-* 10_PETROLCOAL   Petroleum and coal products
-* 18_ELEC         Electricity
 
  CTAX0(z) = 0 ;
  TCTAX0(z) = 0;
@@ -1417,17 +1476,14 @@ execute_unload 'CO2FACTOR_w-1_GTAP11',
 
 *$exit
 
-*Reporting
+****Reporting
 PARAMETER
-* valEE_coal_agg(j,z,sim)
-* valEE_natgas(j,z,sim)
-* valEE_crudeoil(j,z,sim)
-* valEE_oilproduct_agg(j,z,sim)
-* valEE_agr_agg(product,j,z,sim)
-* valEE_ene_agg(product,j,z,sim)
-* valEE_manu_agg(product,j,z,sim)
-* valEE_trans_agg(product,j,z,sim)
-* valEE_bdg_agg(product,z,sim)
+ 
+* valCO2INDI(product,j,z) Industry indirect CO2 emission in region z ktCO2
+* valCO2INDH(product,z)   Household indirect CO2 emission in region z ktCO2
+* valCO2TOTALI(product,j,z) Total industry CO2 emission in region z ktCO2
+* valCO2TOTALH(product,z)   Total household CO2 emission in region z ktCO2
+ 
  valTFC_com(product,z,sim) Total final consumption by energy commodities
  valTFC_ind(j,z,sim) Total final consumption by industry
  valTFC(z,sim) Total final consumption in region z
@@ -1436,9 +1492,10 @@ PARAMETER
  valEE(product,j,z,sim)
  valNE(product,j,z,sim) 
  valEH(product,z,sim)
+
  valCO2I(product,j,z,sim)
  valCO2NE(product,j,z,sim) 
- valCO2H(product,z,sim)   
+ valCO2H(product,z,sim)
  valCH4I(product,j,z,sim)
  valCH4H(product,z,sim)   
  valN2OI(product,j,z,sim) 
@@ -1633,7 +1690,15 @@ VARIABLES
  CH4H(product,z)    Household CH4 emission in region z tCO2eq
  N2OI(product,j,z)  Industry N2O emission in region z tCO2eq
  N2OH(product,z)    Household N2O emission in region z tCO2eq
-
+ 
+ CO2INDI(product,j,z) Industry indirect CO2 emission in region z ktCO2
+ CO2INDH(product,z)   Household indirect CO2 emission in region z ktCO2
+ CO2TOTALI(product,j,z) Total industry CO2 emission in region z ktCO2
+ CO2TOTALH(product,z)   Total household CO2 emission in region z ktCO2
+ ElecTDI(z)         Total electricity consumption in region z by all industries
+ ElecRI(j,z)        Share of electricity used by industry j in total electricity consumption in region z
+ ElecRH(z)          Share of electricity used by household j in region z
+ 
 *==============================================================================
 *   5.1.2 Price variables
 *==============================================================================
@@ -1867,7 +1932,10 @@ EQUATIONS
  EQB_3(j,i,z)       Total producer price is equal to P if there is only one product
  EQB_4(j,i,z)       Basic price of industry js production of commodity i
  EQB_5(j,i,z)       Supply of exports for compsite activity
-
+* EQCO2I             direct CO2 emissions for industry
+* EQCO2H             direct CO2 emissions for households
+ EQCO2INDI          indirect CO2 emissions for industry
+ EQCO2INDH          indirect CO2 emissions for households
 ;
 
 *==============================================================================
@@ -2300,6 +2368,15 @@ $OFFTEXT
 * EQ93..          OBJ   =e= sum(z, prod(i,PC(i,z)**0.5));
  
  EQ93..          OBJ   =e= 1;
+ 
+
+*==============================================================================
+*   5.3.10 CO2 emission
+*==============================================================================
+*indirect emission
+ EQCO2INDI(product,j,z).. CO2INDI(product,j,z) =E= ElecRI(j,z) * (SUM(p_elecheat, Elec_DIO(p_elecheat,j,z) * 41.868 * GHGsEF(p_elecheat,'CO2EF') * (44/12) * 0.001 * GWP('CO2EF')));
+ EQCO2INDH(product,z).. CO2INDH(product,z) =E= ElecRH(z) * (SUM(p_elecheat, Elec_CO(p_elecheat,z) * 41.868 * GHGsEF(p_elecheat,'CO2EF') * (44/12) * 0.001 * GWP('CO2EF')));
+
 *==============================================================================
 * 6 Numerical resolution
 *==============================================================================
@@ -2351,11 +2428,17 @@ $OFFTEXT
  EH.L(product,z)   = EHO(product,z);
  CO2I.L(product,j,z) = CO2IO(product,j,z);
  CO2H.L(product,z)   = CO2HO(product,z);
- CH4I.L(product,j,z) = CH4IO(product,j,z);
- CH4H.L(product,z)   = CH4HO(product,z);
- N2OI.L(product,j,z) = N2OIO(product,j,z);
- N2OH.L(product,z)   = N2OHO(product,z);
-
+* CH4I.L(product,j,z) = CH4IO(product,j,z);
+* CH4H.L(product,z)   = CH4HO(product,z);
+* N2OI.L(product,j,z) = N2OIO(product,j,z);
+* N2OH.L(product,z)   = N2OHO(product,z);
+ CO2INDI.L(product,j,z) = CO2INDIO(product,j,z);
+ CO2INDH.L(product,z)   = CO2INDHO(product,z);
+ CO2TOTALI.L(product,j,z) = CO2TOTALIO(product,j,z);
+ CO2TOTALH.L(product,z)   = CO2TOTALHO(product,z);
+ ElecTDI.L(z)       = ElecTDIO(z);
+ ElecRI.L(j,z)      = ElecRIO(j,z);
+ ElecRH.L(z)        = ElecRHO(z);
 *==============================================================================
 *   6.1.2 Price variables
 *==============================================================================
@@ -2609,7 +2692,10 @@ CTAX.FX('01_KOR') = 0 + 0.1*[ord(sim)]-0.1;
 *ttim.FX(ene,zj,'01_KOR') =   ttimO(ene,zj,'01_KOR')*10*[ord(sim)] ;
 
 SOLVE PEPW1 USING CNS;
+
+*display ElecRI.L, ElecRH.L, Elec_DIO, Elec_CO, GHGsEF;
 *SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
+
  valEE(p_coal,j,z,sim)          = EEI(p_coal,j,z)*DE.L('02_COAL',j,z);
  valEE(p_oil,j,z,sim)           = EEI(p_oil,j,z)*DE.L('03_OIL',j,z);
  valEE(p_gas,j,z,sim)           = EEI(p_gas,j,z)*DE.L('04_GAS',j,z);
@@ -2628,7 +2714,6 @@ SOLVE PEPW1 USING CNS;
  valEH(p_oilproduct,z,sim)      = EHI(p_oilproduct,z)*C.L('10_PETROLCOAL',z);
  valEH(p_elecheat,z,sim)        = EHI(p_elecheat,z)*C.L('18_ELEC',z);
 
-* valEE_bdg_agg(product,z,sim)   = valEH(product,z,sim) + Sum(j10,valEE(product,j10,z,sim));
  valTFC_com(product,z,sim)      = valEH(product,z,sim) + sum(j5,valEE(product,j5,z,sim))+sum(j,valNE(product,j,z,sim));
  valTFC_ind(j,z,sim)            = sum(product,valEE(product,j,z,sim)+valNE(product,j,z,sim));    
  valTFC(z,sim)                  = sum(product, valTFC_com(product,z,sim));
@@ -2646,6 +2731,7 @@ SOLVE PEPW1 USING CNS;
  valTFC_inda('trans',z,sim)     = sum(j9,valTFC_ind(j9,z,sim));
  valTFC_inda('bldg',z,sim)      = sum(j10,valTFC_ind(j10,z,sim))+sum(product,valEH(product,z,sim));
 
+***direct emission
  valCO2I(product,j,z,sim)       = valEE(product,j,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  valCO2NE(product,j,z,sim)      = valNE(product,j,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF')*(1-GHGsEF(product,'Stored_rate')) ;
 
@@ -2659,6 +2745,13 @@ SOLVE PEPW1 USING CNS;
  valTCO2H(z,sim)                = sum((product),valCO2H(product,z,sim));
 
  valTCO2(z,sim)                 = valTCO2H(z,sim) + valTCO2I(z,sim) +valTCO2NE(z,sim) ;
+
+***total emission
+
+
+
+
+
  valGDP_BP(z,sim)               = GDP_BP.l(z);
  valGDP_BP_REAL(z,sim)          = GDP_BP_REAL.l(z);
  valPIXGDP(z,sim)               = PIXGDP.l(z);
@@ -2790,15 +2883,7 @@ SOLVE PEPW1 USING CNS;
 
 
 execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx'
-* valEE_coal_agg
-* valEE_natgas
-* valEE_crudeoil
-* valEE_oilproduct_agg
-* valEE_agr_agg
-* valEE_ene_agg
-* valEE_manu_agg
-* valEE_trans_agg
-* valEE_bdg_agg
+
  valTFC
  valTFC_com
  valTFC_ind
@@ -2958,6 +3043,11 @@ execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240214_CTAX.gdx'
  sigma_X3
  sigma_X4
  sigma_Y
-
+ CO2INDI
+ CO2INDH
+ CO2TOTALI
+ CO2TOTALH
 
  );
+ 
+ 
