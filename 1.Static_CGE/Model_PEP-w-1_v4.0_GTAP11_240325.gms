@@ -131,7 +131,7 @@ NENE(I) Non-energy commodities
  23_SER         Service
 /
 
-J2(J) Industries
+J2(J) Non-energy Industries
 /
 * 01_AGRICULT    Agricultural forest and fishery goods
 * 02_COAL        Coal

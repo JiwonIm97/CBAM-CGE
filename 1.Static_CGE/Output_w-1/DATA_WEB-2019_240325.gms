@@ -777,7 +777,67 @@ $call  gdxxrw Input_WEB/230425_WEB19.xlsx @Input_WEB/WEB19.txt trace=0 output=In
 $gdxIn Input_WEB/230425_WEB19.gdx
 $load  WEB_KOR WEB_CHN WEB_JPN WEB_RUS WEB_MNG WEB_PRK WEB_NAM WEB_LAM WEB_WEU WEB_EEU WEB_FSU WEB_MEA WEB_AFR WEB_CPA WEB_SAS WEB_PAS WEB_PAO GHGsEF physical_unit
 
+set j
+/
+ 01_AGRICULT    Agricultural forest and fishery goods
+ 02_COAL        Coal
+ 03_OIL         Crude petroleum
+ 04_GAS         Natural gas Gas distribution
+ 05_MINING      Mined and quarried goods
+ 06_FOODPRO     Food beverages and tobacco products
+ 07_TEXTILES    Textile and leather products
+ 08_WOODPRO     Wood products
+ 09_PAPERPRO    Paper products
+ 10_PETROLCOAL  Petroleum and coal products
+ 11_CHEMICAL    Chemical products
+ 12_NONMET      Non-metallic mineral products
+ 13_IRONSTL     Primary iron and steel products
+ 14_NONFERR     Non-ferrous metal products
+ 15_MACHINE     Fabricated metal products Electronic and electrical equipment Machinery and equipment
+ 16_TRANSEQ     Motor vehicles Other transport equipment
+ 17_OTHERIND    Other manufactured products Water supply
+ 18_TnD         Transmission and Distribution
+ 19_eNuclear    Nuclear generation
+ 20_eCoal       Coal generation
+ 21_eGas        Gas generation
+ 22_eOil        Oil generation
+ 23_eWind       Wind generation
+ 24_eSolar      Solar generation
+ 25_eHydro      Hydro generation
+ 26_eOther      Other generation
+ 27_CONSTRUC    Construction
+ 28_LTRP        Land transport service(road rail)
+ 29_WTRP        Water transport service
+ 30_ATRP        Air transport service
+ 31_SER         Service
+/
+;
+
+set z
+/
+01_KOR
+02_CHN
+03_JPN
+04_RUS
+05_MNG
+06_PRK
+07_NAM
+08_LAM
+09_WEU
+10_EEU
+11_FSU
+12_MEA
+13_AFR
+14_CPA
+15_SAS
+16_PAS
+17_PAO
+/
+
+;
+
 Parameter WEB(flow,product,z);
+
 WEB(flow,product,'01_KOR') =  WEB_KOR(flow,product);
 WEB(flow,product,'02_CHN') =  WEB_CHN(flow,product);
 WEB(flow,product,'03_JPN') =  WEB_JPN(flow,product);
@@ -799,7 +859,7 @@ WEB(flow,product,'17_PAO') =  WEB_PAO(flow,product);
 execute_unload 'Input_WEB/WEB_2019_230425.gdx',
 *Sets
 WEB ;
-
+*$exit
 
 Parameter
  TCoke_Share(f_cokeoven,product,z)
@@ -807,7 +867,7 @@ Parameter
 ;
 
 Parameter
-  (p_coal,j,z)            Intermediate consumption of coal products by industry j in region z
+ Coal_DIO(p_coal,j,z)            Intermediate consumption of coal products by industry j in region z
  Coal_CO(p_coal,z)               Household consumption of coal products in region z
  CoalR_DIO(p_coal,j,z)           Intermediate consumption ratio of coal products by industry j in region z
  CoalR_CO(p_coal,z)              Household consumption ratio of coal products in region z
@@ -900,7 +960,6 @@ display TCoke_Share, TBlast_Share ;
  Coal_DIO(p_coal,'18_TnD',z) = 0 ;
  Coal_DIO(p_coal,'19_eNuclear',z) = 0 ;
  Coal_DIO(p_coal,'20_eCoal',z) = -1*sum((f_elec), WEB(f_elec, p_coal, z));
- Coal_DIO(p_coal,'19_eNuclear',z) = 0 ;
  Coal_DIO(p_coal,'21_eGas',z) = 0 ;
  Coal_DIO(p_coal,'22_eOil',z) = 0 ;
  Coal_DIO(p_coal,'23_eWind',z) = 0 ;

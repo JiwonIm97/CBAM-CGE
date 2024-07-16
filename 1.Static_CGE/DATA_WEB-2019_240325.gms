@@ -807,7 +807,7 @@ Parameter
 ;
 
 Parameter
-  (p_coal,j,z)            Intermediate consumption of coal products by industry j in region z
+ Coal_DIO(p_coal,j,z)            Intermediate consumption of coal products by industry j in region z
  Coal_CO(p_coal,z)               Household consumption of coal products in region z
  CoalR_DIO(p_coal,j,z)           Intermediate consumption ratio of coal products by industry j in region z
  CoalR_CO(p_coal,z)              Household consumption ratio of coal products in region z
