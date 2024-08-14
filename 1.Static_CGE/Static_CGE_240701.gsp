@@ -52,27 +52,9 @@
         },
         {
             "codecMib": 106,
-            "file": "Output_w-1/calibration_co2.gdx",
-            "name": "calibration_co2.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
             "file": "DATA_WEB-2019_240325.gms",
             "name": "DATA_WEB-2019_240325.gms",
             "type": "gms"
-        },
-        {
-            "codecMib": 106,
-            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.gdx",
-            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
-            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
-            "type": "lst"
         }
     ],
     "options": [

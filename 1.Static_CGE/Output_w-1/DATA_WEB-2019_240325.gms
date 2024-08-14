@@ -726,7 +726,7 @@ Alias(p_gas, p_gas2);
 Alias(p_oil, p_oil2);
 Alias(p_oilproduct, p_oilproduct2);
 Alias(p_elecheat, p_elecheat2);
-
+Alias
 *=== Import from Excel using GDX utilities
 *Unit 2019 ktoe
 Parameter

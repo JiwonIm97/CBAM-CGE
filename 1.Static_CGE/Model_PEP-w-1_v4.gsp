@@ -10,7 +10,6 @@
         }
     ],
     "options": [
-        ""
     ],
     "path": ".",
     "workDir": "."
