@@ -40,7 +40,7 @@ SET
  PUB(J)          Public industries
  F               Production factors
  L(F)            Labor categories
- K(F)            Capital categories
+ K(F)            Capital categories +
  Z               Regions
  ZR(Z)           Reference country (USA)
  Z1(Z)           All regions except reference region
@@ -171,12 +171,12 @@ J2(J) Industries
  09_PAPERPRO    Paper products
 * 10_PETROLCOAL  Petroleum and coal products
  11_CHEMICAL    Chemical products
- 12_NONMET      Non-metallic mineral products
+* 12_NONMET      Non-metallic mineral products
 * 13_IRONSTL     Primary iron and steel products
  14_NONFERR     Non-ferrous metal products
  15_MACHINE     Fabricated metal products Electronic and electrical equipment Machinery and equipment
  16_TRANSEQ     Motor vehicles Other transport equipment
- 17_OTHERIND    Other manufactured products Water supply
+* 17_OTHERIND    Other manufactured products Water supply
 *  18_TnD         Transmission and Distribution
 *  19_eNuclear    Nuclear generation
 *  20_eCoal       Coal generation
@@ -187,7 +187,7 @@ J2(J) Industries
 *  25_eHydro      Hydro generation
 *  26_eOther      Other generation
  27_CONSTRUC    Construction
- 28_LTRP        Land transport service(road rail)
+* 28_LTRP        Land transport service(road rail)
  29_WTRP        Water transport service
  30_ATRP        Air transport service
  31_SER         Service
@@ -213,7 +213,9 @@ J3(J) Energy Industries
  25_eHydro      Hydro generation
  26_eOther      Other generation
  13_IRONSTL     Primary iron and steel products
-
+ 17_OTHERIND    Other manufactured products Water supply
+ 28_LTRP        Land transport service(road rail)
+12_NONMET
 /
 
 J4(J) Energy Transformation Industries
@@ -403,9 +405,9 @@ INDtoCOM(j,i) Industries to commodities
 31_SER.  (23_SER)
 /
 
-*sim /1*41/
-sim/1/;
-
+*sim /1*21/;
+*sim /1*50/;
+sim /1*2/;
 ALIAS (j,jj)
 ALIAS (i,ii,ij)
 ALIAS (l,lj)
@@ -799,6 +801,7 @@ $LOAD sigma_KD, sigma_LD, sigma_KLE, sigma_X1, sigma_X2, sigma_X3, sigma_X0, sig
 * the Excel file VAL_PAR.xls and delete following line:
  sigma_KD(j,z)   = 2*sigma_VA(j,z);
 * sigma_KD(j,z)   = 0.5;
+ sigma_KD('02_COAL','09_WEU')   = 0.5;
 *------------------------------------------------------------------------------
 * CES - composite labor
 * We assume that the elasticity between the different type of labor
@@ -1012,19 +1015,19 @@ $INCLUDE DATA_WEB-2019_240325.gms
 **********   UNIT     *************
 **DIO = ktoe
 **XSTO = 10 billion $
-**CO2ICO= ktco2/10 billion $
-**CP=$/tCO2
+**CO2ICO= ktco2/million$
+**CP=100$/tCO2
 ************************************
 Parameter
 
  CO2IO(product,j,z) ktCO2 direct emission for industry j sector
  CO2HO(product,z)   ktCO2 direct emission for residendital sector
  TCO2IO(j,z)        ktCO2 total emission for industry sector j in region z
- CO2ICO(i,zj)       carbon content for commodity i in region z (tCO2 per 10 billion$)
- TCO2ICO(j,zj)      carbon content for industry sector j in region z (tCO2 per 10 billion$)
+ CO2ICO(i,zj)       carbon content for commodity i in region z (ktCO2 per 10 billion$)
+* TCO2ICO(j,zj)      carbon content for industry sector j in region z (ktCO2 per 10 billion$)
  TCO2IO2(i,zj)
  XSTO2(i,zj)
- CP0(z)              CBAM carbon price per ton CO2 ($ per tonCO2)
+ CP0(z)              CBAM carbon price per ton CO2 (100$ per tonCO2)
 * CBAMO(i,zj,z)      CBAM cost added to imported commodity i from zj to z
 
 
@@ -1052,7 +1055,9 @@ Parameter
 
 ***Total emissions
  TCO2IO(j,z)  = sum(product, CO2IO(product,j,z));
+  
 
+ 
 ***carbon content
 * CO2ICO(j,zj) = TCO2IO(j,zj)/(XSTO(j,zj)*10**7);
  XSTO2(i,zj)  = sum(j$(INDtoCOM(j,i)),XSTO(j,zj));
@@ -1077,7 +1082,7 @@ Parameter
 * N2OHO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
 * N2OHO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'N2OEF')*1000*0.000001*GWP('N2OEF') ;
 
-
+ 
 *execute_unload 'cbam', CO2IO, CO2ICO, XSTO2 ;
 *$exit
 *execute_unload 'DIO_wKLEM', DEO, DIO ;
@@ -1112,8 +1117,6 @@ Parameter
 
  WCO(j,z)$LDCO(j,z)
                  = SUM[l,WTIO(l,j,z)*LDO(l,j,z)]/LDCO(j,z);
-*execute_unload 'cbam', CO2IO, CO2ICO, XSTO2,PMO ;
-*$exit
 
 *==============================================================================
 *  4.3.3 Calibration of other prices and revised volumes (part 3)
@@ -1519,7 +1522,7 @@ Parameter
 *==============================================================================
 Parameters
  CO2FACTOR(ene,j,z)     CO2 emissions factor (tCO2 per 100$)
- CTAX0(z)               initial Carbon tax $ per ton CO2
+ CTAX0(z)               initial Carbon tax 100$ per ton CO2
  TCTAX0(z)              initial Government Revenue from Carbon tax
 ;
 
@@ -1536,7 +1539,6 @@ Parameters
 *execute_unload 'CO2FACTOR_w-1_GTAP11', CO2FACTOR ;
 *execute_unload 'calibration_0723'  ;
 *$exit
-
 
 ****Reporting
 
@@ -1577,6 +1579,7 @@ PARAMETER
  valGDP_BP_REAL(z,sim)  Real GDP at basic prices
  valPIXGDP(z,sim)       GDP deflator in region z
  valCTAX(z,sim)
+ valCP(z,sim)
  valTCTAX(z,sim)
  valPC(i,z,sim)         Purchaser price of composite commodity i (including all taxes and margins) in region z
  valSH(z,sim)           Household savings in region z
@@ -1584,7 +1587,8 @@ PARAMETER
  valPOWER(power,i,z,sim)
  valKOR_TFC(product,sim)
  valKLE(j,z,sim)        Value added of industry j in region z
-
+ valTCO22(j,z,sim)
+ 
  valC(i,z,sim)          Consumption of commodity i by households in region z
  valCAB(z,sim)          Current account balance of region z
  valCABX(z,sim)         Current account balance of region z in terms of the international currency
@@ -1699,6 +1703,7 @@ PARAMETER
  valYHK(z,sim)          Household capital income in region z
  valYHL(z,sim)          Household labor income in region z
  valYROW(z,sim)         Rest-of-the-world total income from region z
+ valTCO2(z,sim)         Total CO2 emission of region z
 ;
 
 *==============================================================================
@@ -1800,7 +1805,7 @@ VARIABLES
  WTI(l,j,z)         Wage rate paid z by industry j for type l labor in region including payroll taxes
  CTAX(Z)            Carbon tax in region z
  CP(z)              Carbon price disparity with EU contries
- CTAXEU(z)          Carbon price of EU
+* CTAXEU(z)          Carbon price of EU
 *==============================================================================
 *   5.1.3 Nominal (value) variables
 *==============================================================================
@@ -2003,8 +2008,8 @@ EQUATIONS
 * EQCO2I(product,j,z) direct and indirect CO2 emissions for industry
 * EQCO2H             direct CO2 emissions for households
 * EQTCO2I            total CO2  emissions
- EQ94(z)           Carbon price disparity with EU
- EQ_94_1(z)         Carbon price of EU
+* EQ94(z)           Carbon price disparity with EU
+* EQ_94_1(z)         Carbon price of EU
 ;
 
 *==============================================================================
@@ -2440,8 +2445,8 @@ $OFFTEXT
 * EQ93..          OBJ   =e= sum(z, prod(i,PC(i,z)**0.5));
  
  EQ93..          OBJ    =e= 1;
- EQ94(z)..       CP(z) =e= CTAXEU(z) - CTAX(z);
- EQ_94_1(z)..    CTAXEU(z) =e= CTAX('09_WEU');
+* EQ94(z)..       CP(z) =e= CTAXEU(z) - CTAX(z);
+* EQ_94_1(z)..    CTAXEU(z) =e= CTAX('09_WEU');
 
 *==============================================================================
 * 6 Numerical resolution
@@ -2631,7 +2636,7 @@ $OFFTEXT
 *  If kmob=1, capital is mobile, if kmob=0, it is sector-specific
 * kmob             = 0;
  kmob             = 1;
-
+*자본이동은 장기적으로 발생
  KD.fx(k,j,z)$(kmob eq 0)
                   = KDO(k,j,z);
                   
@@ -2700,9 +2705,9 @@ $offtext
 
 *option cns = path;
 *option cns = conopt4;
-option NLP = conopt4;
+*option NLP = conopt4;
 *option NLP = minos;
-*option NLP = pathnlp ;
+option NLP = pathnlp ;
 
 *option limrow=0, limcol=0, solprint = off;
 *option iterlim = 100;
@@ -2714,6 +2719,7 @@ PEPW1.holdfixed=1;
 PEPW1.TOLINFREP = 0.0001;
 *SOLVE PEPW1 USING CNS;
 *SOLVE PEPW1 USING MCP;
+
 SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
 
 *$exit
@@ -2741,96 +2747,200 @@ $offtext
 *==============================================================================
 * ctax shock
 *==============================================================================
+CP.fx(z) = 0;
+CTAX.fX(z)=0;
 
 *loop(sim,
-
-*CTAX.FX('01_KOR') = 0 + 0.1*[ord(sim)]-0.1;
+*    if(ord(sim) = 1,    
+*        CTAX.FX(z) = 0;
+*    else
+*        CTAX.FX('01_KOR') = 0.1 * ord(sim) - 0.1;
+*        CTAX.FX('02_CHN') = 0.1 * ord(sim) - 0.15;
+*        CTAX.FX('03_JPN') = 0.1 * ord(sim) - 0.1;
+*        CTAX.FX('04_RUS') = 0.1 * ord(sim) - 0.15;
+*        CTAX.FX('07_NAM') = 0.1 * ord(sim) - 0.1;
+*        CTAX.FX('08_LAM') = 0.1 * ord(sim) - 0.1;
+*        CTAX.FX('09_WEU') = 0.1 * ord(sim) + 0.3;
+*        CTAX.FX('10_EEU') = 0.1 * ord(sim) + 0.3;
+*        CTAX.FX('11_FSU') = 0.1 * ord(sim) - 0.1;
+*        CTAX.FX('12_MEA') = 0.1 * ord(sim) - 0.15;
+*        CTAX.FX('15_SAS') = 0.1 * ord(sim) - 0.15;
+*        CTAX.FX('16_PAS') = 0.1 * ord(sim) - 0.1;
+*        CTAX.FX('17_PAO') = 0.1 * ord(sim) - 0.1;
+      
+*    )
 *Unit: 100$/ton
-
-* ttic.fx(i,'01_KOR')= 0 + 0.01*[ord(sim)]-0.01 ;
-* ttim.FX(i,zj,z)  = ttimO(i,zj,z);
+*ttic.fx(i,'01_KOR')= 0 + 0.01*[ord(sim)]-0.01 ;
+*ttim.FX(i,zj,z)  = ttimO(i,zj,z);
 *ttim.FX(ene,zj,'01_KOR') =   ttimO(ene,zj,'01_KOR')*10*[ord(sim)] ;
 
+****base****
+*loop(sim,
+*    if(ord(sim) = 1,    
+*       CTAX.FX(z) = 0;
+*   else
+*       CTAX.FX('01_KOR') = 0.1;
+*       CTAX.FX('02_CHN') = 0.05;
+*       CTAX.FX('03_JPN') = 0.1;
+*       CTAX.FX('04_RUS') = 0.05;
+*       CTAX.FX('07_NAM') = 0.1;
+*        CTAX.FX('08_LAM') = 0.1;
+*        CTAX.FX('09_WEU') = 0.1 * ord(sim) + 0.3;
+*        CTAX.FX('10_EEU') = 0.1 * ord(sim) + 0.3;
+*        CTAX.FX('11_FSU') = 0.1;
+*        CTAX.FX('12_MEA') = 0.05;
+*        CTAX.FX('15_SAS') = 0.05;
+*        CTAX.FX('16_PAS') = 0.1;
+*        CTAX.FX('17_PAO') = 0.1;
+      
+*    )
+
+$ontext
+****cbam50****
+CTAX.FX('01_KOR') = 0.1;
+CTAX.FX('02_CHN') = 0.05;
+CTAX.FX('03_JPN') = 0.1;
+CTAX.FX('04_RUS') = 0.05;
+CTAX.FX('07_NAM') = 0.1;
+CTAX.FX('08_LAM') = 0.1;
+CTAX.FX('09_WEU') = 0.5;
+CTAX.FX('10_EEU') = 0.5;
+CTAX.FX('11_FSU') = 0.1;
+CTAX.FX('12_MEA') = 0.05;
+CTAX.FX('15_SAS') = 0.05;
+CTAX.FX('16_PAS') = 0.1;
+CTAX.FX('17_PAO') = 0.1;
 
 
-SOLVE PEPW1 USING CNS;
+loop(sim,
+    if(ord(sim) = 1,
+    
+    else
+       CP.FX('01_KOR') = (0.1 * ord(sim) - 0.1)*100;
+       CP.FX('02_CHN') = (0.1 * ord(sim) - 0.05)*100;
+       CP.FX('03_JPN') = (0.1 * ord(sim) - 0.1)*100;
+       CP.FX('04_RUS') = (0.1 * ord(sim) - 0.05)*100;
+       CP.FX('05_MNG') = (0.1 * ord(sim))*100;
+       CP.FX('06_PRK') = (0.1 * ord(sim))*100;
+       CP.FX('07_NAM') = (0.1 * ord(sim) - 0.1)*100;
+       CP.FX('08_LAM') = (0.1 * ord(sim) - 0.1)*100;
+       CP.FX('11_FSU') = (0.1 * ord(sim) - 0.1)*100;
+       CP.FX('12_MEA') = (0.1 * ord(sim) - 0.05)*100;
+       CP.FX('13_AFR') = (0.1 * ord(sim))*100;
+       CP.FX('14_CPA') = (0.1 * ord(sim))*100;
+       CP.FX('15_SAS') = (0.1 * ord(sim) - 0.05)*100;
+       CP.FX('16_PAS') = (0.1 * ord(sim) - 0.1)*100;
+       CP.FX('17_PAO') = (0.1 * ord(sim) - 0.1)*100;
+      
+    )
+$offtext
 
-$exit
-*display ElecRI.L, ElecRH.L, Elec_DIO, Elec_CO, GHGsEF;
+*$ontext
+****cbam150****
+CTAX.FX('01_KOR') = 0.1;
+CTAX.FX('02_CHN') = 0.05;
+CTAX.FX('03_JPN') = 0.1;
+CTAX.FX('04_RUS') = 0.05;
+CTAX.FX('07_NAM') = 0.1;
+CTAX.FX('08_LAM') = 0.1;
+CTAX.FX('09_WEU') = 1.5;
+CTAX.FX('10_EEU') = 1.5;
+CTAX.FX('11_FSU') = 0.1;
+CTAX.FX('12_MEA') = 0.05;
+CTAX.FX('15_SAS') = 0.05;
+CTAX.FX('16_PAS') = 0.1;
+CTAX.FX('17_PAO') = 0.1;
+
+loop(sim,
+    if(ord(sim) = 1,    
+       CP.FX(z) = 0;
+   else
+       CP.FX('01_KOR') = (0.1 * ord(sim) - 0.1)*100+130;
+       CP.FX('02_CHN') = (0.1 * ord(sim) - 0.05)*100+130;
+       CP.FX('03_JPN') = (0.1 * ord(sim) - 0.1)*100+130;
+       CP.FX('04_RUS') = (0.1 * ord(sim) - 0.05)*100+130;
+       CP.FX('05_MNG') = (0.1 * ord(sim))*100+130;
+       CP.FX('06_PRK') = (0.1 * ord(sim))*100+130;
+       CP.FX('07_NAM') = (0.1 * ord(sim) - 0.1)*100+130;
+       CP.FX('08_LAM') = (0.1 * ord(sim) - 0.1)*100+130;
+       CP.FX('11_FSU') = (0.1 * ord(sim) - 0.1)*100+130;
+       CP.FX('12_MEA') = (0.1 * ord(sim) - 0.05)*100+130;
+       CP.FX('13_AFR') = (0.1 * ord(sim))*100+130;
+       CP.FX('14_CPA') = (0.1 * ord(sim))*100+130;
+       CP.FX('15_SAS') = (0.1 * ord(sim) - 0.05)*100+130;
+       CP.FX('16_PAS') = (0.1 * ord(sim) - 0.1)*100+130;
+       CP.FX('17_PAO') = (0.1 * ord(sim) - 0.1)*100+130;
+      
+    )
+*$offtext
+
 *SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
+SOLVE PEPW1 USING CNS;
+*execute_unload 'Output_w-1/240818.gdx'
+
 *$exit
  
  valEE(p_coal,j,z,sim)          = EEI(p_coal,j,z)*DE.L('02_COAL',j,z);
  valEE(p_oil,j,z,sim)           = EEI(p_oil,j,z)*DE.L('03_OIL',j,z);
  valEE(p_gas,j,z,sim)           = EEI(p_gas,j,z)*DE.L('04_GAS',j,z);
  valEE(p_oilproduct,j,z,sim)    = EEI(p_oilproduct,j,z)*DE.L('10_PETROLCOAL',j,z);
- valEE(p_elecheat,j,z,sim)      = EEI(p_elecheat,j,z)*DE.L('18_ELEC',j,z);
-
+* valEE(p_elecheat,j,z,sim)      = EEI(p_elecheat,j,z)*DE.L('18_ELEC',j,z);
+ valEE(p_elec,j,z,sim)          = EEI(p_elec,j,z)*DE.L('18_ELEC',j,z);
+ 
  valNE(p_coal,j,z,sim)          = NEI(p_coal,j,z)*DE.L('02_COAL',j,z);
  valNE(p_oil,j,z,sim)           = NEI(p_oil,j,z)*DE.L('03_OIL',j,z);
  valNE(p_gas,j,z,sim)           = NEI(p_gas,j,z)*DE.L('04_GAS',j,z);
  valNE(p_oilproduct,j,z,sim)    = NEI(p_oilproduct,j,z)*DE.L('10_PETROLCOAL',j,z);
- valNE(p_elecheat,j,z,sim)      = NEI(p_elecheat,j,z)*DE.L('18_ELEC',j,z);
-
+* valNE(p_elecheat,j,z,sim)      = NEI(p_elecheat,j,z)*DE.L('18_ELEC',j,z);
+ valNE(p_elec,j,z,sim)          = NEI(p_elec,j,z)*DE.L('18_ELEC',j,z);
+ 
  valEH(p_coal,z,sim)            = EHI(p_coal,z)*C.L('02_COAL',z);
  valEH(p_oil,z,sim)             = EHI(p_oil,z)*C.L('03_OIL',z);
  valEH(p_gas,z,sim)             = EHI(p_gas,z)*C.L('04_GAS',z); 
  valEH(p_oilproduct,z,sim)      = EHI(p_oilproduct,z)*C.L('10_PETROLCOAL',z);
- valEH(p_elecheat,z,sim)        = EHI(p_elecheat,z)*C.L('18_ELEC',z);
+*valEH(p_elecheat,z,sim)        = EHI(p_elecheat,z)*C.L('18_ELEC',z);
+ valEH(p_elec,z,sim)            = EHI(p_elec,z)*C.L('18_ELEC',z);
 
  valTFC_com(product,z,sim)      = valEH(product,z,sim) + sum(j5,valEE(product,j5,z,sim))+sum(j,valNE(product,j,z,sim));
  valTFC_ind(j,z,sim)            = sum(product,valEE(product,j,z,sim)+valNE(product,j,z,sim));    
  valTFC(z,sim)                  = sum(product, valTFC_com(product,z,sim));
- valTFC_enea('coal',z,sim)      = sum(p_coal_agg, valTFC_com(p_coal_agg,z,sim));
- valTFC_enea('natgas',z,sim)    = sum(p_natgas, valTFC_com(p_natgas,z,sim));
- valTFC_enea('crudeoil',z,sim)  = sum(p_crudeoil, valTFC_com(p_crudeoil,z,sim));
- valTFC_enea('oilprdt',z,sim)   = sum(p_oilproduct_agg, valTFC_com(p_oilproduct_agg,z,sim));
- valTFC_enea('elec',z,sim)      = sum(p_elec, valTFC_com(p_elec,z,sim));
- valTFC_enea('heat',z,sim)      = sum(p_heat, valTFC_com(p_heat,z,sim));
  
- valTFC_inda('agr',z,sim)       = sum(j6,valTFC_ind(j6,z,sim));
- valTFC_inda('elec',z,sim)      = sum(j7,valTFC_ind(j7,z,sim));
- valTFC_inda('manu',z,sim)      = sum(j8,valTFC_ind(j8,z,sim));
- valTFC_inda('trans',z,sim)     = sum(j9,valTFC_ind(j9,z,sim));
- valTFC_inda('bldg',z,sim)      = sum(j10,valTFC_ind(j10,z,sim))+sum(product,valEH(product,z,sim));
+* valTFC_enea('coal',z,sim)      = sum(p_coal_agg, valTFC_com(p_coal_agg,z,sim));
+* valTFC_enea('natgas',z,sim)    = sum(p_natgas, valTFC_com(p_natgas,z,sim));
+* valTFC_enea('crudeoil',z,sim)  = sum(p_crudeoil, valTFC_com(p_crudeoil,z,sim));
+* valTFC_enea('oilprdt',z,sim)   = sum(p_oilproduct_agg, valTFC_com(p_oilproduct_agg,z,sim));
+* valTFC_enea('elec',z,sim)      = sum(p_elec, valTFC_com(p_elec,z,sim));
+* valTFC_enea('heat',z,sim)      = sum(p_heat, valTFC_com(p_heat,z,sim));
+ 
+* valTFC_inda('agr',z,sim)       = sum(j6,valTFC_ind(j6,z,sim));
+* valTFC_inda('elec',z,sim)      = sum(j7,valTFC_ind(j7,z,sim));
+* valTFC_inda('manu',z,sim)      = sum(j8,valTFC_ind(j8,z,sim));
+* valTFC_inda('trans',z,sim)     = sum(j9,valTFC_ind(j9,z,sim));
+* valTFC_inda('bldg',z,sim)      = sum(j10,valTFC_ind(j10,z,sim))+sum(product,valEH(product,z,sim));
 
-***direct emission
  valCO2I(product,j,z,sim)       = valEE(product,j,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  valCO2NE(product,j,z,sim)      = valNE(product,j,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF')*(1-GHGsEF(product,'Stored_rate')) ;
 
  valCO2I2(j,z,sim)              = sum(product,valCO2I(product,j,z,sim));
  valCO2NE2(j,z,sim)             = sum(product,valCO2NE(product,j,z,sim));
-
+ valTCO22(j,z,sim)              = valCO2I2(j,z,sim)+valCO2NE2(j,z,sim);
+ 
  valTCO2I(z,sim)                = sum((product,j),valCO2I(product,j,z,sim));
  valTCO2NE(z,sim)               = sum((product,j),valCO2NE(product,j,z,sim));
+ valTCO2(z,sim)                 = valTCO2I(z,sim) + valTCO2NE(z,sim);
 
- valCO2H(product,z,sim)         = valEH(product,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
- valTCO2H(z,sim)                = sum((product),valCO2H(product,z,sim));
+* valCO2H(product,z,sim)         = valEH(product,z,sim)*41.868*GHGsEF(product,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
+* valTCO2H(z,sim)                = sum((product),valCO2H(product,z,sim));
 
-
-***indirect emission
-* ElecTDI(z)                     = SUM((p_elecheat,j), EEO(p_elecheat,j,z)); 
-* ElecRI(j,z)                    = SUM(p_elecheat, EEO(p_elecheat,j,z)) / ElecTDI(z) ;
-
-* valCO2INDI(product,j,z,sim)    = valCO2I(product,j,z,sim)*ElecRI(j,z);
-* valCO2INDNE(product,j,z,sim)   = valCO2NE(product,j,z,sim)*ElecRI(j,z);
- 
-* valCO2INDI2(j,z,sim)           = sum(product,valCO2INDI(product,j,z,sim)); 
-* valCO2INDNE2(j,z,sim)          = sum(product,valCO2INDNE(product,j,z,sim));
-
-* valTCO2INDI(z,sim)             = sum((product,j),valCO2INDI(product,j,z,sim));
-* valTCO2INDNE(z,sim)            = sum((product,j),valCO2INDNE(product,j,z,sim));
-
-***total emission
-* valTCO2(z,sim)                 = valTCO2H(z,sim) + valTCO2I(z,sim) + valTCO2NE(z,sim) + valTCO2INDI(z,sim) + valTCO2INDNE(z,sim);
 
 ***carbon content
- valXST(j,z,sim)                = XST.l(j,z);
+* valXST(j,z,sim)                = XST.l(j,z);
 * valCO2C(j,z,sim)               = (valCO2I2(j,z,sim) + valCO2NE2(j,z,sim) + valCO2INDI2(j,z,sim) + valCO2INDNE2(j,z,sim))/valXST(j,z,sim);
  valGDP_BP(z,sim)               = GDP_BP.l(z);
  valGDP_BP_REAL(z,sim)          = GDP_BP_REAL.l(z);
  valPIXGDP(z,sim)               = PIXGDP.l(z);
  valCTAX(z,sim)                 = CTAX.L(z);
+ valCP(z,sim)                   = CP.L(z);
  valTCTAX(z,sim)                = TCTAX.L(z);
  valSH(z,sim)                   = SH.l(z);
  valKLE(j,z,sim)                = KLE.l(j,z);
@@ -2947,178 +3057,17 @@ $exit
  valWTI(l,j,z,sim)              = WTI.l(l,j,z);
  valXS(j,i,z,sim)               = XS.l(j,i,z);
  valXS_I(i,z,sim)               = XS_I.l(i,z);
-
+ 
  valYDH(z,sim)                  = YDH.l(z);
  valYG(z,sim)                   = YG.l(z);
  valYH(z,sim)                   = YH.l(z);
  valYHK(z,sim)                  = YHK.l(z);
  valYHL(z,sim)                  = YHL.l(z);
- valYROW(z,sim)                 = YROW.l(z);
-
-
-
-execute_unload 'Output_w-1/results_PEP-w-1_v4.0_GTAP11_240724.gdx'
- valTFC
- valTFC_com
- valTFC_ind
- valTFC_enea
- valTFC_inda
- valEE
- valNE
- valEH
- valKOR_TFC
- valCO2I
- valCO2NE
- valCO2H
- valCH4I
- valCH4H
- valN2OI
- valN2OH
- valCO2I2
- valCO2NE2 
- valTCO2I
- valTCO2NE
- valTCO2H
- valTCO2
- valCTAX
- valTCTAX
- valPC
- valPOWER
- valGDP_BP
- valGDP_BP_REAL
- valPIXGDP
- valSH
- valKLE
- EEI
- valC
- valCAB
- valCABX
- valCG
- valCI
- valCE
- valCMIN
- valCTH
- valCTH_REAL
- valDD
- valDEP
- valDI
- ValDE
- valDIT
- valDS
- valDS_I
- vale
- valEX
- valEXT
- valG
- valG_REAL
- valGDP_BP
- valGDP_BP_REAL
- valGDP_BP_W
- valGDP_BP_W_REAL
- valGDP_FD
- valGDP_IB
- valGDP_MP
- valGDP_MP_REAL
- valIM
- valIMT
- valINV
- valIT
- valIT_REAL
- valKD
- valKDC
- valKS
- valLD
- valLDC
- valLS
- valMRGN
- valP
- valPT
- valP2
- valPC
- valPCI
- valPCE
- valPD
- valPE
- valPET
- valPIXCON
- valPIXGDP
- valPIXGDP_W
- valPIXGVT
- valPIXINV
- valPK
- valPL
- valPM
- valPMT
- valPP
- valPVA
- valPKLE
- valPWM
- valPWMG
- valPWX
- valQ
- valR
- valRC
- valRK
- valRTI
- valSG
- valSH
- valsh0
- valsh1
- valSROW
- valTCTAX
- valTDH
- valTIC
- valTICT
- valTIK
- valTIKT
- valTIM
- valTIMT
- valTIP
- valTIPT
- valTIW
- valTIWT
- valTIX
- valTIXT
- valTPRCTS
- valTPRODN
- valttdh0
- valttdh1
- valttic
- valttik
- valttim
- valttip
- valttiw
- valttix
- valVA
- valKLE
- valW
- valWC
- valWTI
- valXS
- valXS_I
- valXST
- valYDH
- valYG
- valYH
- valYHK
- valYHL
- valYROW
- POPO
- sigma_KD
- sigma_LD
- sigma_M1
- sigma_M2
- sigma_VA
- sigma_KLE
- sigma_ENER
- sigma_X0
- sigma_X1
- sigma_X2
- sigma_X3
- sigma_X4
- sigma_Y
- tmrg
- e
- );
+ valYROW(z,sim)                 = YROW.l(z)
  
- 
+);
+
+
+
+execute_unload 'Output_w-1/240820.gdx'
+$exit

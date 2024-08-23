@@ -1,0 +1,223 @@
+52
+4 253 0 0 456  1.00000000000000E+0000 0  0.00000000000000E+0000 0 1
+87534 47950 0 0 136 87534 0 0 0 0 0 0
+87534 70553 0 0 0 0 0 0
+430362 260424
+87534 0 0 0 0 0 0 0 0 87534
+0 0 0 0 0 0 0
+1 7964 0
+792318 58834 20
+ 1.00000000000000E-0004  0.00000000000000E+0000 0
+0  0.00000000000000E+0000 0  0.00000000000000E+0000
+ 1.00000000000000E+0010 2147483647 0
+1 0
+ 0.00000000000000E+0000 0 1 0  1.00000000000000E+0000 0 1 0 0  1.00000000000000E-0005 0
+87534 100
+0 0 0 0 0
+ 0.00000000000000E+0000  0.00000000000000E+0000  0.00000000000000E+0000  0.00000000000000E+0000  0.00000000000000E+0000
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\gamsmatr.dat
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\gamsinst.dat
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\conopt4.opt
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\gamsstat.dat
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\gamssolu.dat
+
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\gamsdict.dat
+3
+12:09:35
+08/22/24
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\
+C:\GAMS\45\
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\
+32767 2147483647
+0 0 728 45525 44827 61093
+Medium MUD - 10 User License                   S220825|0002AO-WIN0
+Konkuk University, Dept of Technology Fusion Engineering         0
+1801526201COGEM5PTCP                                             0
+0 1 85375 0
+225ae\gmsprmNT.dat
+15 51 7
+LP          11 0
+MIP         11 0
+RMIP        11 0
+NLP         5 7
+MCP         42 0
+MPEC        35 0
+RMPEC       35 0
+CNS         5 0
+DNLP        5 0
+RMINLP      5 0
+MINLP       16 0
+QCP         5 0
+MIQCP       45 0
+RMIQCP      5 0
+EMP         25 0
+ALPHAECP    11 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmsecpnt.cmd
+gmsecpnx.exe
+ANTIGONE    2011 5 1 0 0 0 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+BARON       1001 5 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0
+gmsba_nt.cmd
+gmsba_nx.exe
+CBC         2011 5 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgennt.cmd
+gmsgennx.exe
+CONOPT      1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd
+gmsgennx.exe
+CONOPT3     1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd optconopt.def
+gmsgennx.exe
+CONOPT4     1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd
+gmsgennx.exe
+CONVERT     103011 5 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+gmsgennt.cmd optconvert.def
+gmsgennx.exe
+CONVERTOLD  103011 5 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+gmscv_nt.cmd
+gmscv_nx.exe
+COPT        1011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+CPLEX       2011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+CPLEXCLASSIC 1011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgennt.cmd optcplex.def
+gmsgennx.exe
+DE          102011 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+gmsgennt.cmd
+gmsgennx.exe
+DECISC      2011 5 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+gmsdecnt.cmd optdecis.def
+DECISM      2011 5 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+gmsdemnt.cmd optdecis.def
+DICOPT      1 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmsdi_nt.cmd
+gmsdi_nx.exe
+EXAMINER    103011 5 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+EXAMINER2   103011 5 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd optexaminer.def
+gmsgennx.exe
+GAMSCHK     103011 5 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 0
+gmsck_nt.cmd
+gmsck_nx.exe
+GLOMIQO     2011 5 1 0 0 0 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+GUROBI      11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+HIGHS       11 5 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgennt.cmd
+gmsgennx.exe
+IPOPT       11 5 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd
+gmsgennx.exe
+IPOPTH      11 5 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd optipopt.def
+gmsgennx.exe
+JAMS        101011 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+gmsja_nt.cmd
+gmsja_nx.exe
+KESTREL     103010 5 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+gmske_nt.cmd
+KNITRO      103011 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+LINDO       1 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1
+gmsgennt.cmd
+gmsgennx.exe
+LINDOGLOBAL 1 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+LOGMIP      101011 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+gmsja_nt.cmd optjams.def
+gmsja_nx.exe
+MILES       103001 5 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+gmsmcent.cmd
+gmsmcenx.exe
+MINOS       1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd
+gmsgennx.exe
+MOSEK       11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+MPSGE       100001 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgewnt.cmd
+gmsgewnx.exe
+NLPEC       103001 0 1 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0
+gmscvnnt.cmd
+gmscvnnx.exe
+OCTERACT    1001 0 1 0 0 0 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+ODHCPLEX    2011 5 1 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0
+gmsgennt.cmd
+gmsgennx.exe
+OSICPLEX    2011 5 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+OSIGUROBI   11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+OSIMOSEK    11 5 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+OSIXPRESS   11 5 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+PATH        103001 5 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0
+gmsgennt.cmd
+gmsgennx.exe
+PATHNLP     11 5 1 1 0 1 1 0 0 0 0 1 1 0 1 0 1 0
+gmsptnnt.cmd
+gmsptnnx.exe
+QUADMINOS   1 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgennt.cmd optminos.def
+gmsgennx.exe
+SBB         11 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmssb_nt.cmd
+gmssb_nx.exe
+SCENSOLVER  1001 5 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+SCIP        2001 5 1 0 1 0 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+SHOT        1001 5 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0
+gmsgennt.cmd
+gmsgennx.exe
+SNOPT       1 0 1 1 0 1 1 0 0 0 1 1 1 0 1 0 1 0
+gmsgennt.cmd
+gmsgennx.exe
+SOPLEX      11 5 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+gmsgennt.cmd
+gmsgennx.exe
+XPRESS      11 5 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0
+gmsgennt.cmd
+gmsgennx.exe
+22166164C0C0C0C0C0C0                                             0
+DC16297      g 3                               A Invoice         0
+License Admin: MInyoung Choi, mychoi1119@naver.com               0
+1 C:\Users\JIWON\OneDrive\kakaotalk\GAMS\gamslice.txt
+1 C:\GAMS\45\gmscmpnt.txt
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.dat
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0  1.00000000000000E+0000 0 10384
+0 0 0
+0 0 0 1 0
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\PEPW1.dll
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\sbbinfo.dat
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225ae\gamscntr.dat
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\
+dat
+ 1.00000000000000E+0299
+
+
+C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Output_w-1\Model_PEP-w-1_v4.0_GTAP11_240325.gms
+ 4.30362000000000E+0005  2.60424000000000E+0005

@@ -1,0 +1,11 @@
+Input=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Output_w-1\Model_PEP-w-1_v4.0_GTAP11_240325.gms
+PageSize=0
+ScrDir=225m
+SysDir=C:\GAMS\45
+ScriptNext=225m\gamsnext.cmd
+LogOption=3
+ErrMsg=1
+ErrorLog=99
+IDE=1
+GDX=default
+LstTitleLeftAligned=1

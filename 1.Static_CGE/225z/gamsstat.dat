@@ -1,0 +1,88 @@
+=1
+=2
+=0CONOPT 4         45.6.0 2eadeefd Jan 4, 2024           WEI x86 64bit/MS Window
+=1
+ 
+ 
+    C O N O P T   version 4.31
+    Copyright (C) ARKI Consulting and Development A/S
+                  Bagsvaerdvej 246 A
+                  DK-2880 Bagsvaerd, Denmark
+ 
+=2
+ 
+  ***  Line    0  SET       LFEERR =            0
+ 
+  ***  Line    0  SET       LFEERR =            0
+ 
+  ***  Line    0  SET       LFITER =   2147483647
+ 
+  ***  Line    0  SET       RVTIME =     1.0000000000E+10
+=1
+    65 constant coefficients less than 1.0E-20 (=Tol_Zero) have been removed.
+    430435 coefficients left.
+=2
+=1
+ 
+    The user model has 87534 constraints and 87534 variables
+    with 430435 Jacobian elements, 260562 of which are nonlinear.
+=2
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          7.2469805499E+02 (Input point)
+=1
+ 
+    The pre-triangular part of the model has 5640 constraints and variables.
+=2
+=1
+    The post-triangular part of the model has 1153 constraints and variables.
+=2
+=1
+    There are 27703 definitional constraints and defined variables.
+=2
+=1
+ 
+    Preprocessed model has 53038 constraints and 53038 variables
+    with 302525 Jacobian elements, 235697 of which are nonlinear.
+=2
+                      5.4419970053E+02 (Full preprocessed model)
+                      7.0443013497E+01 (After scaling)
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       1   0          6.3152405724E+01                 5.0E-01     0 F  F
+       2  S0          5.9534986270E+01                 5.0E-01     0 F  F
+       3  S0          5.4794139904E+01                 1.0E+00     0 T  T
+       4  S0          4.4174085057E+01                 1.0E+00     3 T  T
+       5  S0          2.6125667298E+01                 1.0E+00     1 T  T
+       6  S0          5.9673110207E+00                 1.0E+00     1 T  T
+       7   0          2.2025737168E+00                 1.0E+00     2 T  T
+       8   0          2.0889194551E+00                 1.0E+00     1 T  T
+       9   0          2.0310929225E+00                 1.0E+00     1 T  T
+      10   0          2.0258655310E+00                 1.0E+00     1 T  T
+      11   0          2.0252863737E+00                 1.0E+00     1 T  T
+      12   0          2.0252856048E+00                 1.0E+00     1 T  T
+      13   0          2.0252856017E+00                 1.0E+00     1 T  T
+      14   1       5  2.0267213758E+00 8.7E+00       4 0.0E+00     4 F  F
+      15   1       5  2.0270644709E+00 6.5E+01       4 4.2E-06     5 F  F
+      16   1       3  1.8485715857E+00 1.2E+02       4 1.0E+00     7 T  T
+      17   1       3  2.6680369749E+01 8.7E-01       1 5.0E-05     2 F  T
+      18   2       3  5.2117461484E+00 1.5E-01       1 2.5E-05     1 F  T
+      19   2       3  1.8485206709E+00 2.5E+00       3 1.2E-04     3 F  F
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+      20   2       3  5.2200882096E+00 1.5E-01       1 2.0E-06     1 F  T
+      21   2       3  1.8484534938E+00 1.4E-01       3 2.2E-04     4 F  F
+      22   2       3  1.8483868973E+00 1.4E-01       3 3.4E-04     4 F  F
+      23   2       3  5.0106725077E+00 1.6E-01       1 2.5E-05     2 F  T
+      24   2       3  5.2244786972E+00 1.5E-01       1 2.5E-05     3 F  T
+      25   2       3  1.8483190484E+00 2.5E+00       3 1.9E-04     3 F  F
+      26   2       3  5.2264643628E+00 1.5E-01       1 2.5E-05     2 F  T
+      27   2       3  1.8482535477E+00 2.5E+00       3 1.9E-04     3 F  F
+      28   2       3  5.2299299845E+00 1.5E-01       1 2.5E-05     2 F  T
+      29   2       3  1.8481880557E+00 2.5E+00       3 1.9E-04     3 F  F
+      30   2       3  5.2333085109E+00 1.5E-01       1 3.1E-05     2 F  T
+      31   2       3  1.8481207552E+00 2.5E+00       3 1.9E-04     3 F  F
+      32   2       3  5.2357991064E+00 1.5E-01       1 2.5E-05     2 F  T
+      33   2       3  5.2363343774E+00 1.5E-01       1 2.5E-05     1 F  T
+      34   2       3  1.8480480239E+00 2.5E+00       3 1.9E-04     3 F  F
+      35   1       3  1.8489283391E+00 1.4E-01       2 2.1E-03 

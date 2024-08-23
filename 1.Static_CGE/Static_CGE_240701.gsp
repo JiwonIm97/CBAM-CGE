@@ -34,14 +34,32 @@
         },
         {
             "codecMib": 106,
-            "file": "Output_w-1/Model_PEP-w-1_v4.0_GTAP11_240325.gms",
-            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gms",
-            "type": "gms"
+            "file": "Output_w-1/240820.gdx",
+            "name": "240820.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "file": "Output_w-1/base.gdx",
+            "name": "base.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "file": "Output_w-1/cbam50.gdx",
+            "name": "cbam50.gdx",
+            "type": "gdx"
         },
         {
             "codecMib": 106,
             "file": "Output_w-1/DATA_WEB-2019_240325.gms",
             "name": "DATA_WEB-2019_240325.gms",
+            "type": "gms"
+        },
+        {
+            "codecMib": 106,
+            "file": "Output_w-1/Model_PEP-w-1_v4.0_GTAP11_240325.gms",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gms",
             "type": "gms"
         },
         {
@@ -52,9 +70,27 @@
         },
         {
             "codecMib": 106,
+            "file": "calibration_0723.gdx",
+            "name": "calibration_0723.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
             "file": "DATA_WEB-2019_240325.gms",
             "name": "DATA_WEB-2019_240325.gms",
             "type": "gms"
+        },
+        {
+            "codecMib": 106,
+            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.gdx",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
+            "type": "lst"
         }
     ],
     "options": [
