@@ -1,119 +1,233 @@
 
---- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Start 08/23/24 15:52:47 45.6.0 2eadeefd WEX-WEI x86 64bit/MS Windows
+--- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Start 08/23/24 23:11:34 42.5.0 cf11b917 WEX-WEI x86 64bit/MS Windows
 --- Applying:
-    C:\GAMS\45\gmsprmNT.txt
+    C:\GAMS\42\gmsprmNT.txt
+    C:\Users\kimc0\Documents\GAMS\gamsconfig.yaml
 --- GAMS Parameters defined
-    Input C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Output_w-1\Model_PEP-w-1_v4.0_GTAP11_240325.gms
+    Input C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.gms
     PageSize 0
-    ScrDir C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225af\
-    SysDir C:\GAMS\45\
+    ScrDir C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\225b\
+    SysDir C:\GAMS\42\
     LogOption 3
     ErrMsg 1
     ErrorLog 99
     IDE 1
-    GDX C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.gdx
     LstTitleLeftAligned 1
-*** License file too old for this version of GAMS.
-*** Maintenance expired 25 days ago.
 Licensee: Medium MUD - 10 User License                   S220825|0002AO-WIN
           Konkuk University, Dept of Technology Fusion Engineering  DC16297
-          C:\Users\JIWON\OneDrive\kakaotalk\GAMS\gamslice.txt
+          C:\Users\kimc0\Documents\GAMS\gamslice.txt
           License Admin: MInyoung Choi, mychoi1119@naver.com               
-          The maintenance period of the license expired on Sep 19, 2023
-          Please contact GAMS or your distributor for further information
-Processor information: 1 socket(s), 12 core(s), and 16 thread(s) available
-GAMS 45.6.0   Copyright (C) 1987-2024 GAMS Development. All rights reserved
+Processor information: 1 socket(s), 6 core(s), and 12 thread(s) available
+GAMS 42.5.0   Copyright (C) 1987-2023 GAMS Development. All rights reserved
 --- Starting compilation
 --- Model_PEP-w-1_v4.0_GTAP11_240325.gms(51) 2 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(655) 3 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(791) 5 Mb
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(657) 3 Mb
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(794) 5 Mb
 --- call gdxxrw Input_w-1\JointB_VAL_230411_PAR.xls @Input_w-1\JointB_POWER_PAR.txt trace=0 output=Input_w-1\JointB_VAL_230411_PAR.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(792) 5 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1012) 5 Mb
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(796) 5 Mb
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1018) 5 Mb
 --- . DATA_WEB-2019_240325.gms(754) 5 Mb
---- $echo File C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB19.txt
+--- $echo File C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB19.txt
 --- . DATA_WEB-2019_240325.gms(776) 5 Mb
 --- call gdxxrw Input_WEB/230425_WEB19.xlsx @Input_WEB/WEB19.txt trace=0 output=Input_WEB/230425_WEB19.gdx
 --- . DATA_WEB-2019_240325.gms(777) 5 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
---- . DATA_WEB-2019_240325.gms(1268) 6 Mb
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3072) 6 Mb
---- Starting execution: elapsed 0:00:03.296
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1811) 9 Mb
---- GDX File (execute_unload) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB_2019_230425.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(2254) 9 Mb
---- GDX File (execute_unload) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\DATA_WEB-2019_230418.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3986) 19 Mb
---- Generating NLP model PEPW1
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3990) 58 Mb
----   87,432 rows  87,451 columns  428,998 non-zeroes
----   782,735 nl-code  258,866 nl-non-zeroes
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
+--- . DATA_WEB-2019_240325.gms(1270) 6 Mb
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3079) 6 Mb
+--- Starting execution: elapsed 0:00:05.735
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1820) 9 Mb
+--- GDX File (execute_unload) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB_2019_230425.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(2262) 9 Mb
+--- GDX File (execute_unload) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\DATA_WEB-2019_230418.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3997) 18 Mb
+--- Generating CNS model PEPW1
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3999) 57 Mb
+---   87,397 rows  87,397 columns  428,334 non-zeroes
+---   780,404 nl-code  258,057 nl-non-zeroes
 --- Range statistics (absolute non-zero finite values)
 --- RHS       [min, max] : [ 1.354E-02, 8.352E+02] - Zero values observed as well
---- Bound     [min, max] : [ 5.012E-17, 2.685E-03] - Zero values observed as well
+--- Bound     [min, max] : [        NA,        NA]
 --- Matrix    [min, max] : [ 1.059E-20, 1.609E+04] - Zero values observed as well
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3990) 52 Mb
---- Executing CONOPT4 (Solvelink=2): elapsed 0:00:03.970
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3999) 51 Mb
+--- Executing CONOPT (Solvelink=2): elapsed 0:00:07.235
 
-CONOPT 4         45.6.0 2eadeefd Jan 4, 2024           WEI x86 64bit/MS Window
+CONOPT 3         42.5.0 cf11b917 Mar 30, 2023          WEI x86 64bit/MS Window
 
  
  
-    C O N O P T   version 4.31
-    Copyright (C) ARKI Consulting and Development A/S
-                  Bagsvaerdvej 246 A
-                  DK-2880 Bagsvaerd, Denmark
+    C O N O P T 3   version 3.17N
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
  
-    65 constant coefficients less than 1.0E-20 (=Tol_Zero) have been removed.
-    428933 coefficients left.
  
-    The user model has 87432 constraints and 87451 variables
-    with 428933 Jacobian elements, 258866 of which are nonlinear.
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.0065556942E-08 (Input point)
  
-    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
-       0   0          1.0065035482E-08 (Input point)
+                   Pre-triangular equations:   5591
+                   Post-triangular equations:  1510
  
-    The pre-triangular part of the model has 5655 constraints and variables.
-    The post-triangular part of the model has 1408 constraints and variables.
-    There are 45644 definitional constraints and defined variables.
+      1   0        1.0063696132E-08 (After pre-processing)
+      2   0        6.7178472524E-10 (After scaling)
  
-    Preprocessed model has 34725 constraints and 34744 variables
-    with 401170 Jacobian elements, 353256 of which are nonlinear.
- 
-    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
-                      1.0497394397E-08 (Full preprocessed model)
-                      6.8790399508E-10 (After scaling)
- 
- ** Feasible solution. Value of objective =    1.00000000000
- 
-    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
-       1   3          1.0000000000E+00 0.0E+00       0
- 
- ** Optimal solution. Reduced gradient less than tolerance.
+ ** Feasible solution to a square system.
  
 --- Reading solution for model PEPW1
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3990) 52 Mb  9 secs
---- Executing after solve: elapsed 0:00:13.747
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4121) 52 Mb
---- Generating MCP model PEPW1
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 64 Mb 50290 Errors
+--- Executing after solve: elapsed 0:00:09.182
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4132) 51 Mb
+--- Generating CNS model PEPW1
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4156) 63 Mb
 --- LOOPS sim = 1
----   87,432 rows  87,432 columns  429,393 non-zeroes
----   787,824 nl-code  259,200 nl-non-zeroes
+---   87,397 rows  87,397 columns  429,069 non-zeroes
+---   786,326 nl-code  258,792 nl-non-zeroes
 --- Range statistics (absolute non-zero finite values)
 --- RHS       [min, max] : [ 1.354E-02, 8.352E+02] - Zero values observed as well
---- Bound     [min, max] : [ 5.012E-17, 2.685E-03]
+--- Bound     [min, max] : [        NA,        NA]
 --- Matrix    [min, max] : [ 1.059E-20, 1.609E+04] - Zero values observed as well
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 58 Mb
-*** SOLVE aborted
---- GDX File C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 58 Mb 50290 Errors
-*** Status: Execution error(s)
---- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Stop 08/23/24 15:53:02 elapsed 0:00:14.762
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4156) 57 Mb
+--- Executing CONOPT (Solvelink=2): elapsed 0:00:10.468
+
+CONOPT 3         42.5.0 cf11b917 Mar 30, 2023          WEI x86 64bit/MS Window
+
+ 
+ 
+    C O N O P T 3   version 3.17N
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        1.7524326848E+02 (Input point)
+ 
+                   Pre-triangular equations:   5578
+                   Post-triangular equations:  1510
+ 
+      1   0        1.7524326848E+02 (After pre-processing)
+      2   0        4.3610366928E+01 (After scaling)
+      3   0     0  2.9989166576E+01               5.0E-01      F  T
+      4   0     0  1.6096511387E+01               1.0E+00      F  T
+      5   0     0  8.5931973242E+00               1.0E+00      F  T
+      6   0     0  3.1034042427E+00               1.0E+00      F  T
+      7   0     0  3.1034042427E+00               0.0E+00      F  F
+      8   0     0  2.2875380746E+00               1.0E+00      F  T
+      9   0     0  2.6019624736E-01               1.0E+00      F  T
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+     10   0     0  5.3870906262E-02               1.0E+00      F  T
+     11   0     0  8.1513698132E-03               1.0E+00      F  T
+     12   0     0  1.8523876158E-03               1.0E+00      F  T
+     13   0     0  4.7632217813E-04               1.0E+00      F  T
+     14   0     0  8.3203915137E-05               1.0E+00      F  T
+     15   0     0  2.6106339146E-05               1.0E+00      F  T
+     16   0     0  5.6780093289E-06               1.0E+00      F  T
+     17   0     0  1.6122348074E-06               1.0E+00      F  T
+     18   0     0  3.7320439367E-07               1.0E+00      F  T
+     19   0     0  1.0647006339E-07               1.0E+00      F  T
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+     20   0     0  2.7748888124E-08               1.0E+00      F  T
+     21   0     0  6.4742064100E-09               1.0E+00      F  T
+     22   0     0  1.8702849113E-09               1.0E+00      F  T
+     23   0     0  4.8917272586E-10               1.0E+00      F  T
+ 
+ ** Feasible solution to a square system.
+ 
+--- Reading solution for model PEPW1
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4156) 57 Mb  4 secs
+--- Executing after solve: elapsed 0:00:14.389
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4132) 57 Mb
+--- Generating CNS model PEPW1
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4156) 69 Mb
+--- LOOPS sim = 2
+---   87,397 rows  87,397 columns  429,099 non-zeroes
+---   786,326 nl-code  258,792 nl-non-zeroes
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.354E-02, 8.352E+02] - Zero values observed as well
+--- Bound     [min, max] : [        NA,        NA]
+--- Matrix    [min, max] : [ 1.055E-20, 1.643E+04] - Zero values observed as well
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4156) 63 Mb
+--- Executing CONOPT (Solvelink=2): elapsed 0:00:15.774
+
+CONOPT 3         42.5.0 cf11b917 Mar 30, 2023          WEI x86 64bit/MS Window
+
+ 
+ 
+    C O N O P T 3   version 3.17N
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        7.3243676763E+01 (Input point)
+ 
+                   Pre-triangular equations:   5576
+                   Post-triangular equations:  1510
+ 
+      1   0        7.3243676763E+01 (After pre-processing)
+      2   0        6.6618632075E+01 (After scaling)
+      3   0     0  4.9070764372E+00               1.0E+00      F  T
+      4   0     0  1.3498785824E+00               1.0E+00      F  T
+      5   0     0  2.3751267444E-01               1.0E+00      F  T
+      6   0     0  7.0989545268E-02               1.0E+00      F  T
+      7   0     0  3.1573372660E-02               1.0E+00      F  T
+      8   0     0  1.6751503366E-02               1.0E+00      F  T
+      9   0     0  9.9510603345E-03               1.0E+00      F  T
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+     10   0     0  5.9276874221E-03               1.0E+00      F  T
+     11   0     0  3.5507906092E-03               1.0E+00      F  T
+     12   0     0  2.1418341951E-03               1.0E+00      F  T
+     13   0     0  1.3006057256E-03               1.0E+00      F  T
+     14   0     0  7.9411543683E-04               1.0E+00      F  T
+     15   0     0  4.8720636682E-04               1.0E+00      F  T
+     16   0     0  3.0008028008E-04               1.0E+00      F  T
+     17   0     0  1.8543700790E-04               1.0E+00      F  T
+     18   0     0  1.1491925786E-04               1.0E+00      F  T
+     19   0     0  7.1385206722E-05               1.0E+00      F  T
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+     20   0     0  4.4447696296E-05               1.0E+00      F  T
+     21   0     0  2.7725157373E-05               1.0E+00      F  T
+     22   0     0  1.7317176387E-05               1.0E+00      F  T
+     23   0     0  1.0828061118E-05               1.0E+00      F  T
+     24   0     0  6.7769996632E-06               1.0E+00      F  T
+     25   0     0  4.2449477132E-06               1.0E+00      F  T
+     26   0     0  2.6607165267E-06               1.0E+00      F  T
+     27   0     0  1.6687113745E-06               1.0E+00      F  T
+     28   0     0  1.0470772808E-06               1.0E+00      F  T
+     29   0     0  6.5732898564E-07               1.0E+00      F  T
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+     30   0     0  4.1280689365E-07               1.0E+00      F  T
+     31   0     0  2.5933650486E-07               1.0E+00      F  T
+     32   0     0  1.6297049693E-07               1.0E+00      F  T
+     33   0     0  1.0243948262E-07               1.0E+00      F  T
+     34   0     0  6.4405823014E-08               1.0E+00      F  T
+     35   0     0  4.0504195980E-08               1.0E+00      F  T
+     36   0     0  2.5477874315E-08               1.0E+00      F  T
+     37   0     0  1.6028698340E-08               1.0E+00      F  T
+     38   0     0  1.0085158297E-08               1.0E+00      F  T
+     39   0     0  6.3466771788E-09               1.0E+00      F  T
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+     40   0     0  3.9950041672E-09               1.0E+00      F  T
+     41   0     0  2.5152232435E-09               1.0E+00      F  T
+ 
+ ** Feasible solution to a square system.
+ 
+--- Reading solution for model PEPW1
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4156) 63 Mb  3 secs
+--- Executing after solve: elapsed 0:00:19.070
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4348) 63 Mb
+--- GDX File (execute_unload) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Output_w-1\240820.gdx
+*** Status: Normal completion
+--- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Stop 08/23/24 23:11:53 elapsed 0:00:19.271

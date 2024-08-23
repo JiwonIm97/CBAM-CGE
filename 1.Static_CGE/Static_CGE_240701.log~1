@@ -1,250 +1,52 @@
 
---- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Start 08/23/24 15:57:42 45.6.0 2eadeefd WEX-WEI x86 64bit/MS Windows
+--- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Start 08/23/24 23:12:43 42.5.0 cf11b917 WEX-WEI x86 64bit/MS Windows
 --- Applying:
-    C:\GAMS\45\gmsprmNT.txt
+    C:\GAMS\42\gmsprmNT.txt
+    C:\Users\kimc0\Documents\GAMS\gamsconfig.yaml
 --- GAMS Parameters defined
-    Input C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Output_w-1\Model_PEP-w-1_v4.0_GTAP11_240325.gms
+    Input C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.gms
     PageSize 0
-    ScrDir C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\225af\
-    SysDir C:\GAMS\45\
+    ScrDir C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\225b\
+    SysDir C:\GAMS\42\
     LogOption 3
     ErrMsg 1
     ErrorLog 99
     IDE 1
-    GDX C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.gdx
     LstTitleLeftAligned 1
-*** License file too old for this version of GAMS.
-*** Maintenance expired 25 days ago.
 Licensee: Medium MUD - 10 User License                   S220825|0002AO-WIN
           Konkuk University, Dept of Technology Fusion Engineering  DC16297
-          C:\Users\JIWON\OneDrive\kakaotalk\GAMS\gamslice.txt
+          C:\Users\kimc0\Documents\GAMS\gamslice.txt
           License Admin: MInyoung Choi, mychoi1119@naver.com               
-          The maintenance period of the license expired on Sep 19, 2023
-          Please contact GAMS or your distributor for further information
-Processor information: 1 socket(s), 12 core(s), and 16 thread(s) available
-GAMS 45.6.0   Copyright (C) 1987-2024 GAMS Development. All rights reserved
+Processor information: 1 socket(s), 6 core(s), and 12 thread(s) available
+GAMS 42.5.0   Copyright (C) 1987-2023 GAMS Development. All rights reserved
 --- Starting compilation
 --- Model_PEP-w-1_v4.0_GTAP11_240325.gms(51) 2 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(655) 3 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(791) 5 Mb
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(657) 3 Mb
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(794) 5 Mb
 --- call gdxxrw Input_w-1\JointB_VAL_230411_PAR.xls @Input_w-1\JointB_POWER_PAR.txt trace=0 output=Input_w-1\JointB_VAL_230411_PAR.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(792) 5 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1012) 5 Mb
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(796) 5 Mb
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_w-1\JointB_VAL_230411_PAR.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1018) 5 Mb
 --- . DATA_WEB-2019_240325.gms(754) 5 Mb
---- $echo File C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB19.txt
+--- $echo File C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB19.txt
 --- . DATA_WEB-2019_240325.gms(776) 5 Mb
 --- call gdxxrw Input_WEB/230425_WEB19.xlsx @Input_WEB/WEB19.txt trace=0 output=Input_WEB/230425_WEB19.gdx
 --- . DATA_WEB-2019_240325.gms(777) 5 Mb
---- GDXin=C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
---- GDX File ($gdxIn) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
---- . DATA_WEB-2019_240325.gms(1268) 6 Mb
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3072) 6 Mb
---- Starting execution: elapsed 0:00:03.459
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1811) 9 Mb
---- GDX File (execute_unload) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB_2019_230425.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(2254) 9 Mb
---- GDX File (execute_unload) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\DATA_WEB-2019_230418.gdx
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3986) 19 Mb
---- Generating NLP model PEPW1
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3990) 58 Mb
----   87,432 rows  87,451 columns  428,998 non-zeroes
----   782,735 nl-code  258,866 nl-non-zeroes
---- Range statistics (absolute non-zero finite values)
---- RHS       [min, max] : [ 1.354E-02, 8.352E+02] - Zero values observed as well
---- Bound     [min, max] : [ 5.012E-17, 2.685E-03] - Zero values observed as well
---- Matrix    [min, max] : [ 1.059E-20, 1.609E+04] - Zero values observed as well
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(3990) 52 Mb
---- Executing PATHNLP (Solvelink=2): elapsed 0:00:04.208
-
-PATH-NLP         45.6.0 2eadeefd Jan 4, 2024           WEI x86 64bit/MS Window
-
-Hessian lowTri size: 1522256
-Hessian   diag size: 37811
-Hessian  total size: 3006701
-NLP size: 0 obj coefs, 87431 rows, 87450 cols, 428997 non-zeros, 0.00% dense.
-MCP size: 174881 rows/cols, 3864695 non-zeros, 0.01% dense.
-
-Path 5.0.07 (Thu Jan  4 04:06:57 2024)
-Written by Todd Munson, Steven Dirkse, Youngdae Kim, and Michael Ferris
-
-Zero:     0 Single:  1936 Double:  5096
-Preprocessed size   : 160834
-
-INITIAL POINT STATISTICS
-Zero column of order. . . . . .  0.0000e+00 var: (IM(13_IRONSTL,09_WEU,09_WEU))
-Zero column of order. . . . . .  0.0000e+00 var: (IM(13_IRONSTL,10_EEU,10_EEU))
-Zero column of order. . . . . .  3.2779e-09 var: (PCI(09_PAPERPRO,05_MNG))
-Zero column of order. . . . . .  3.0479e-10 var: (PCI(15_MACHINE,05_MNG))
-Zero column of order. . . . . .  5.2932e-10 var: (PCI(16_TRANSEQ,05_MNG))
-Zero column of order. . . . . .  1.4236e-07 var: (PCI(19_eNuclear,05_MNG))
-Zero column of order. . . . . .  1.1837e-08 var: (PCI(19_eNuclear,06_PRK))
-Zero column of order. . . . . .  2.6265e-07 var: (PCI(19_eNuclear,14_CPA))
-Zero column of order. . . . . .  1.1209e-07 var: (PCI(19_eNuclear,17_PAO))
-Zero row of order . . . . . . .  0.0000e+00 eqn: (dLd_IM(13_IRONSTL,09_WEU,09_W)
-Zero row of order . . . . . . .  0.0000e+00 eqn: (dLd_IM(13_IRONSTL,10_EEU,10_E)
-Zero row of order . . . . . . .  3.2779e-09 eqn: (dLd_PCI(09_PAPERPRO,05_MNG))
-Zero row of order . . . . . . .  3.0479e-10 eqn: (dLd_PCI(15_MACHINE,05_MNG))
-Zero row of order . . . . . . .  5.2932e-10 eqn: (dLd_PCI(16_TRANSEQ,05_MNG))
-Zero row of order . . . . . . .  1.4236e-07 eqn: (dLd_PCI(19_eNuclear,05_MNG))
-Zero row of order . . . . . . .  1.1837e-08 eqn: (dLd_PCI(19_eNuclear,06_PRK))
-Zero row of order . . . . . . .  2.6265e-07 eqn: (dLd_PCI(19_eNuclear,14_CPA))
-Zero row of order . . . . . . .  1.1209e-07 eqn: (dLd_PCI(19_eNuclear,17_PAO))
-Total zero columns. . . . . . .  17
-Total zero rows . . . . . . . .  17
-Maximum of X. . . . . . . . . .  8.1117e+03 var: (GDP_BP_W)
-Maximum of F. . . . . . . . . .  1.0000e+00 eqn: (EQ65(01_KOR))
-Maximum of Grad F . . . . . . .  1.6095e+04 eqn: (EQ41(03_OIL,05_MNG))
-                                            var: (DS_I(03_OIL,05_MNG))
-
-INITIAL JACOBIAN NORM STATISTICS
-Maximum Row Norm. . . . . . . .  1.6098e+04 eqn: (dLd_DS_I(03_OIL,05_MNG))
-Minimum Row Norm. . . . . . . .  3.0479e-10 eqn: (dLd_PCI(15_MACHINE,05_MNG))
-Maximum Column Norm . . . . . .  1.6098e+04 var: (DS_I(03_OIL,05_MNG))
-Minimum Column Norm . . . . . .  3.0479e-10 var: (PCI(15_MACHINE,05_MNG))
-
-Crash Log
-major  func  diff  size  residual    step       prox   (label)
-    0     0             2.2826e-09             0.0e+00 (EQ41(15_MACHINE,02_CHN))
-
-Major Iteration Log
-major minor  func  grad  residual    step  type prox    inorm  (label)
-    0     0     1     1 2.2826e-09           I 0.0e+00 1.4e-09 (EQ41(15_MACHINE)
-
-FINAL STATISTICS
-Inf-Norm of Complementarity . .  1.3542e-09 eqn: (EQ41(15_MACHINE,02_CHN))
-Inf-Norm of Normal Map. . . . .  1.3542e-09 eqn: (EQ41(15_MACHINE,02_CHN))
-Inf-Norm of Minimum Map . . . .  1.3542e-09 eqn: (EQ41(15_MACHINE,02_CHN))
-Inf-Norm of Fischer Function. .  1.3542e-09 eqn: (EQ41(15_MACHINE,02_CHN))
-Inf-Norm of Grad Fischer Fcn. .  2.7773e-07 eqn: (dLd_PET(15_MACHINE,02_CHN))
-Two-Norm of Grad Fischer Fcn. .  5.0912e-07
-
-FINAL POINT STATISTICS
-Zero column of order. . . . . .  0.0000e+00 var: (IM(13_IRONSTL,09_WEU,09_WEU))
-Zero column of order. . . . . .  0.0000e+00 var: (IM(13_IRONSTL,10_EEU,10_EEU))
-Zero column of order. . . . . .  3.2779e-09 var: (PCI(09_PAPERPRO,05_MNG))
-Zero column of order. . . . . .  3.0479e-10 var: (PCI(15_MACHINE,05_MNG))
-Zero column of order. . . . . .  5.2932e-10 var: (PCI(16_TRANSEQ,05_MNG))
-Zero column of order. . . . . .  1.4236e-07 var: (PCI(19_eNuclear,05_MNG))
-Zero column of order. . . . . .  1.1837e-08 var: (PCI(19_eNuclear,06_PRK))
-Zero column of order. . . . . .  2.6265e-07 var: (PCI(19_eNuclear,14_CPA))
-Zero column of order. . . . . .  1.1209e-07 var: (PCI(19_eNuclear,17_PAO))
-Zero row of order . . . . . . .  0.0000e+00 eqn: (dLd_IM(13_IRONSTL,09_WEU,09_W)
-Zero row of order . . . . . . .  0.0000e+00 eqn: (dLd_IM(13_IRONSTL,10_EEU,10_E)
-Zero row of order . . . . . . .  3.2779e-09 eqn: (dLd_PCI(09_PAPERPRO,05_MNG))
-Zero row of order . . . . . . .  3.0479e-10 eqn: (dLd_PCI(15_MACHINE,05_MNG))
-Zero row of order . . . . . . .  5.2932e-10 eqn: (dLd_PCI(16_TRANSEQ,05_MNG))
-Zero row of order . . . . . . .  1.4236e-07 eqn: (dLd_PCI(19_eNuclear,05_MNG))
-Zero row of order . . . . . . .  1.1837e-08 eqn: (dLd_PCI(19_eNuclear,06_PRK))
-Zero row of order . . . . . . .  2.6265e-07 eqn: (dLd_PCI(19_eNuclear,14_CPA))
-Zero row of order . . . . . . .  1.1209e-07 eqn: (dLd_PCI(19_eNuclear,17_PAO))
-Total zero columns. . . . . . .  17
-Total zero rows . . . . . . . .  17
-Maximum of X. . . . . . . . . .  8.1117e+03 var: (GDP_BP_W)
-Maximum of F. . . . . . . . . .  1.0000e+00 eqn: (EQ65(01_KOR))
-Maximum of Grad F . . . . . . .  1.6095e+04 eqn: (EQ41(03_OIL,05_MNG))
-                                            var: (DS_I(03_OIL,05_MNG))
-
- ** EXIT - solution found.
-
-Major Iterations. . . . 0
-Minor Iterations. . . . 0
-Restarts. . . . . . . . 0
-Crash Iterations. . . . 0
-Gradient Steps. . . . . 0
-Function Evaluations. . 1
-Gradient Evaluations. . 1
-Basis Time. . . . . . . 0.000000
-Total Time. . . . . . . 0.438000
-Residual. . . . . . . . 2.282588e-09
-Postsolved residual: 2.2826e-09
-The MCP solved
-NLP objective: 1
-
---- Reading solution for model PEPW1
---- Executing after solve: elapsed 0:00:06.459
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4121) 52 Mb
---- Generating CNS model PEPW1
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 64 Mb
---- LOOPS sim = 1
----   87,432 rows  87,432 columns  429,393 non-zeroes
----   787,824 nl-code  259,200 nl-non-zeroes
---- Range statistics (absolute non-zero finite values)
---- RHS       [min, max] : [ 1.354E-02, 8.352E+02] - Zero values observed as well
---- Bound     [min, max] : [ 5.012E-17, 2.685E-03]
---- Matrix    [min, max] : [ 1.059E-20, 1.609E+04] - Zero values observed as well
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 58 Mb
---- Executing CONOPT (Solvelink=2): elapsed 0:00:07.152
-
-CONOPT 3         45.6.0 2eadeefd Jan 4, 2024           WEI x86 64bit/MS Window
-
- 
- 
-    C O N O P T 3   version 3.17O
-    Copyright (C)   ARKI Consulting and Development A/S
-                    Bagsvaerdvej 246 A
-                    DK-2880 Bagsvaerd, Denmark
- 
- 
-   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
-      0   0        1.7559893736E+02 (Input point)
- 
-                   Pre-triangular equations:   5579
-                   Post-triangular equations:  1408
- 
-      1   0        1.7559893736E+02 (After pre-processing)
-      2   0        4.3966035808E+01 (After scaling)
-      3   0     0  3.1367303040E+01               6.9E-01      T  T
-      4   0     0  3.3944634497E+01               0.0E+00      T  T
- 
- ** Error in Square System: A variable tries to exceed its bound.
- 
---- Reading solution for model PEPW1
---- Executing after solve: elapsed 0:00:08.449
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4121) 59 Mb
---- Generating CNS model PEPW1
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 71 Mb
---- LOOPS sim = 2
----   87,432 rows  87,432 columns  429,423 non-zeroes
----   787,824 nl-code  259,200 nl-non-zeroes
---- Range statistics (absolute non-zero finite values)
---- RHS       [min, max] : [ 1.354E-02, 8.352E+02] - Zero values observed as well
---- Bound     [min, max] : [ 5.012E-17, 2.685E-03]
---- Matrix    [min, max] : [ 1.065E-20, 1.634E+04] - Zero values observed as well
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4145) 64 Mb
---- Executing CONOPT (Solvelink=2): elapsed 0:00:09.179
-
-CONOPT 3         45.6.0 2eadeefd Jan 4, 2024           WEI x86 64bit/MS Window
-
- 
- 
-    C O N O P T 3   version 3.17O
-    Copyright (C)   ARKI Consulting and Development A/S
-                    Bagsvaerdvej 246 A
-                    DK-2880 Bagsvaerd, Denmark
- 
- 
-   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
-      0   0        7.3657331143E+02 (Input point)
- 
-                   Pre-triangular equations:   5577
-                   Post-triangular equations:  1408
- 
-      1   0        5.0260691041E+02 (After pre-processing)
-      2   0        1.0326799012E+02 (After scaling)
-      3   0     0  1.0326799012E+02               0.0E+00      T  T
- 
- ** Error in Square System: A variable tries to exceed its bound.
- 
---- Reading solution for model PEPW1
---- Executing after solve: elapsed 0:00:10.122
---- Model_PEP-w-1_v4.0_GTAP11_240325.gms(4339) 64 Mb
---- GDX File (execute_unload) C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Output_w-1\240820.gdx
---- GDX File C:\Users\JIWON\GUIDE_GLOBAL_CGE\1.Static_CGE\Model_PEP-w-1_v4.0_GTAP11_240325.gdx
+--- GDXin=C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
+--- GDX File ($gdxIn) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\230425_WEB19.gdx
+--- . DATA_WEB-2019_240325.gms(1270) 6 Mb
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1095) 6 Mb
+--- Starting execution: elapsed 0:00:05.847
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(1820) 8 Mb
+--- GDX File (execute_unload) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\WEB_2019_230425.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(2262) 9 Mb
+--- GDX File (execute_unload) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\Input_WEB\DATA_WEB-2019_230418.gdx
+--- Model_PEP-w-1_v4.0_GTAP11_240325.gms(2364) 9 Mb
+--- GDX File (execute_unload) C:\Users\kimc0\GUIDE_GLOBAL_CGE\1.Static_CGE\cbam.gdx
 *** Status: Normal completion
---- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Stop 08/23/24 15:57:52 elapsed 0:00:10.283
+--- Job Model_PEP-w-1_v4.0_GTAP11_240325.gms Stop 08/23/24 23:12:49 elapsed 0:00:06.112

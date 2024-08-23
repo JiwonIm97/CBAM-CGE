@@ -48,7 +48,9 @@ SET
  Zother(Z)       Non-rich regions
  sim             simulation
 
-$GDXIN Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+*$GDXIN Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+$GDXIN DATA_AGG-2019_GTAP11_240214.gdx
+
 $LOAD J, I, I1, BUS, PUB, F, L, K, Z, ZR, Z1, Zrich, Zother
 TND(J) TnD
 /
@@ -652,7 +654,8 @@ Scalar
 *==============================================================================
 *  The PEP w-1 model uses aggregated data from GTAP8.1. The following file
 *  includes data for some variables and substitution elasticities.
-$GDXIN Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+*$GDXIN Input_w-1\DATA_AGG-2019_GTAP11_240214.gdx
+$GDXIN DATA_AGG-2019_GTAP11_240214.gdx
 
 $LOAD CO, CGO, DDO, DEPO, DIO, DSO, DSO_I, EXO, IMO, INVO, KSTO, LDO, MRGNO, XSO, XSO_I, XSTO, RKDO,
 $LOAD POPO, TDHO, TICO, TIKO, TIMO, TIPO, TIWO, TIXO, tmrg
@@ -788,8 +791,12 @@ eta = 1;
 PARAMETER
 PARZ;
 
-$CALL gdxxrw Input_w-1\JointB_VAL_230411_PAR.xls @Input_w-1\JointB_POWER_PAR.txt trace=0 output=Input_w-1\JointB_VAL_230411_PAR.gdx
-$GDXIN Input_w-1\JointB_VAL_230411_PAR.gdx
+*$CALL gdxxrw Input_w-1\JointB_VAL_230411_PAR.xls @Input_w-1\JointB_POWER_PAR.txt trace=0 output=Input_w-1\JointB_VAL_230411_PAR.gdx
+
+*$CALL gdxxrw JointB_VAL_230411_PAR.xls @Input_w-1\JointB_POWER_PAR.txt trace=0 output=Input_w-1\JointB_VAL_230411_PAR.gdx
+*$GDXIN Input_w-1\JointB_VAL_230411_PAR.gdx
+$GDXIN JointB_VAL_230411_PAR.gdx
+
 $LOAD sigma_KD, sigma_LD, sigma_KLE, sigma_X1, sigma_X2, sigma_X3, sigma_X0, sigma_y, PARZ
 
 *$exit
@@ -1038,9 +1045,11 @@ Parameter
 * N2OHO(product,z)   tCO2eq direct emission for residendital sector
  GWP(type)          GWP 100 AR5
  ;
+ 
  GWP('CO2EF') = 1;
  GWP('CH4EF') = 28;
  GWP('N2OEF') = 265;
+ 
 ***Direct emissions
  CO2IO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2IO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;

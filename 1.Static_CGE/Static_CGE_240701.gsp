@@ -1,7 +1,13 @@
 {
-    "file": "Output_w-1/Model_PEP-w-1_v4.0_GTAP11_240325.gms",
+    "file": "Model_PEP-w-1_v4.0_GTAP11_240325.gms",
     "name": "Static_CGE_240701",
     "nodes": [
+        {
+            "codecMib": 106,
+            "file": "../../Downloads/Model_PEP-w-1_v4.0_GTAP11_240325.gms",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gms",
+            "type": "gms"
+        },
         {
             "codecMib": 106,
             "file": "Input_w-1/DATA_AGG-2019_GTAP11_240214.gdx",
@@ -76,6 +82,12 @@
         },
         {
             "codecMib": 106,
+            "file": "cbam.gdx",
+            "name": "cbam.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
             "file": "DATA_WEB-2019_240325.gms",
             "name": "DATA_WEB-2019_240325.gms",
             "type": "gms"
@@ -88,6 +100,12 @@
         },
         {
             "codecMib": 106,
+            "file": "Model_PEP-w-1_v4.0_GTAP11_240325.gms",
+            "name": "Model_PEP-w-1_v4.0_GTAP11_240325.gms",
+            "type": "gms"
+        },
+        {
+            "codecMib": 106,
             "file": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
             "name": "Model_PEP-w-1_v4.0_GTAP11_240325.lst",
             "type": "lst"
@@ -97,6 +115,5 @@
         ""
     ],
     "path": ".",
-    "pf": "",
     "workDir": "."
 }
