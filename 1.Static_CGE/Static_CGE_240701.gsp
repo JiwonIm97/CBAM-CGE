@@ -70,12 +70,6 @@
         },
         {
             "codecMib": 106,
-            "file": "calibration_0723.gdx",
-            "name": "calibration_0723.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
             "file": "DATA_WEB-2019_240325.gms",
             "name": "DATA_WEB-2019_240325.gms",
             "type": "gms"

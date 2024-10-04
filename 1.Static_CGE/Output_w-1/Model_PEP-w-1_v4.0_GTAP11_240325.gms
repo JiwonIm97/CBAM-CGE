@@ -405,9 +405,9 @@ INDtoCOM(j,i) Industries to commodities
 31_SER.  (23_SER)
 /
 
-*sim /1*21/;
+sim /1*15/;
 *sim /1*50/;
-sim /1*2/;
+*sim /1*2/;
 ALIAS (j,jj)
 ALIAS (i,ii,ij)
 ALIAS (l,lj)
@@ -1051,7 +1051,7 @@ Parameter
  CO2HO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
 
 ***Indirect emissions
- CO2IO(p_elec,j,z) = {sum((p_coal,elec),CO2IO(p_coal,elec,z))+sum((p_oilproduct,elec),CO2IO(p_oilproduct,elec,z))+sum((p_gas,elec),CO2IO(p_gas,elec,z))}*{sum(p_elecheat,Elec_DIO(p_elecheat,j,z))/sum((p_elecheat,jj),Elec_DIO(p_elecheat,jj,z))};
+* CO2IO(p_elec,j,z) = {sum((p_coal,elec),CO2IO(p_coal,elec,z))+sum((p_oilproduct,elec),CO2IO(p_oilproduct,elec,z))+sum((p_gas,elec),CO2IO(p_gas,elec,z))}*{sum(p_elecheat,Elec_DIO(p_elecheat,j,z))/sum((p_elecheat,jj),Elec_DIO(p_elecheat,jj,z))};
 
 ***Total emissions
  TCO2IO(j,z)  = sum(product, CO2IO(product,j,z));
@@ -1065,6 +1065,9 @@ Parameter
  CO2ICO(i,zj) = TCO2IO2(i,zj)/(XSTO2(i,zj)*10**7);
  CO2ICO(i3,zj) =0 ;
  CP0(z)=0;
+
+ CO2ICO(i,'06_PRK') =  CO2ICO(i,'06_PRK')*0.6;
+ CO2ICO(i,'04_RUS') =  CO2ICO(i,'04_RUS')*0.6;
 
 * CH4IO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
 * CH4IO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CH4EF')*1000*0.000001*GWP('CH4EF') ;
@@ -2717,10 +2720,10 @@ option NLP = pathnlp ;
 MODEL PEPW1 World wide static model /all/ ;
 PEPW1.holdfixed=1;
 PEPW1.TOLINFREP = 0.0001;
-*SOLVE PEPW1 USING CNS;
+SOLVE PEPW1 USING CNS;
 *SOLVE PEPW1 USING MCP;
 
-SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
+*SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
 
 *$exit
 *==============================================================================
@@ -2774,26 +2777,27 @@ CTAX.fX(z)=0;
 *ttim.FX(i,zj,z)  = ttimO(i,zj,z);
 *ttim.FX(ene,zj,'01_KOR') =   ttimO(ene,zj,'01_KOR')*10*[ord(sim)] ;
 
+*$onText
 ****base****
-*loop(sim,
-*    if(ord(sim) = 1,    
-*       CTAX.FX(z) = 0;
-*   else
-*       CTAX.FX('01_KOR') = 0.1;
-*       CTAX.FX('02_CHN') = 0.05;
-*       CTAX.FX('03_JPN') = 0.1;
-*       CTAX.FX('04_RUS') = 0.05;
-*       CTAX.FX('07_NAM') = 0.1;
-*        CTAX.FX('08_LAM') = 0.1;
-*        CTAX.FX('09_WEU') = 0.1 * ord(sim) + 0.3;
-*        CTAX.FX('10_EEU') = 0.1 * ord(sim) + 0.3;
-*        CTAX.FX('11_FSU') = 0.1;
-*        CTAX.FX('12_MEA') = 0.05;
-*        CTAX.FX('15_SAS') = 0.05;
-*        CTAX.FX('16_PAS') = 0.1;
-*        CTAX.FX('17_PAO') = 0.1;
-      
-*    )
+loop(sim,
+    if(ord(sim) = 1,    
+       CTAX.FX(z) = 0;
+   else
+       CTAX.FX('01_KOR') = 0.1;
+       CTAX.FX('02_CHN') = 0.05;
+       CTAX.FX('03_JPN') = 0.1;
+       CTAX.FX('04_RUS') = 0.05;
+       CTAX.FX('07_NAM') = 0.1;
+       CTAX.FX('08_LAM') = 0.1;
+       CTAX.FX('09_WEU') = 0.1 * ord(sim) + 0.3;
+       CTAX.FX('10_EEU') = 0.1 * ord(sim) + 0.3;
+        CTAX.FX('11_FSU') = 0.1;
+        CTAX.FX('12_MEA') = 0.05;
+        CTAX.FX('15_SAS') = 0.05;
+        CTAX.FX('16_PAS') = 0.1;
+        CTAX.FX('17_PAO') = 0.1;     
+    )
+*$offText
 
 $ontext
 ****cbam50****
@@ -2835,7 +2839,7 @@ loop(sim,
     )
 $offtext
 
-*$ontext
+$ontext
 ****cbam150****
 CTAX.FX('01_KOR') = 0.1;
 CTAX.FX('02_CHN') = 0.05;
@@ -2872,7 +2876,7 @@ loop(sim,
        CP.FX('17_PAO') = (0.1 * ord(sim) - 0.1)*100+130;
       
     )
-*$offtext
+$offtext
 
 *SOLVE PEPW1 USING nlp MAXIMIZING OBJ;
 SOLVE PEPW1 USING CNS;

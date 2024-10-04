@@ -93,7 +93,7 @@ I All commodities except agriculture
  13_IRONSTL     Primary iron and steel products
  14_NONFERR     Non-ferrous metal products
  15_MACHINE     Fabricated metal products Electronic and electrical equipment Machinery and equipment
- 16_TRANSEQ     Motor vehicles Other transport equipment
+ 16_TRANSEQ     Motor vehicles Other transport equipment    
  17_OTHERIND    Other manufactured products Water supply
  18_ELEC        Electricity
  19_CONSTRUC    Construction
@@ -653,8 +653,8 @@ $LOAD VTMFSD, VXSB, VFOB, XTRV
                        SUM[marg,VTMFSD(marg,comm,regj,reg)]};
 *lt Strictly less than
 * IMO(i,zj, z)$(IMO(i, zj, z) lt 1e-05) = 0.000001 ;
- IMO(i,zj, z)$(IMO(i, zj, z) lt  0.0001) = 0.00001 ;
-
+* IMO(i,zj, z)$(IMO(i, zj, z) lt  0.0001) = 0.00001 ;
+ IMO(i,zj, z)$(IMO(i, zj, z) lt  0.0001) = 0 ;
  IMO(i,zj,z)$sameas(zj,z) = 0 ;
 *==============================================================================
 * 2.4.6 Exports
