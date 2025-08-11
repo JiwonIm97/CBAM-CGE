@@ -777,7 +777,10 @@ $call  gdxxrw Input_WEB/230425_WEB19.xlsx @Input_WEB/WEB19.txt trace=0 output=In
 $gdxIn Input_WEB/230425_WEB19.gdx
 $load  WEB_KOR WEB_CHN WEB_JPN WEB_RUS WEB_MNG WEB_PRK WEB_NAM WEB_LAM WEB_WEU WEB_EEU WEB_FSU WEB_MEA WEB_AFR WEB_CPA WEB_SAS WEB_PAS WEB_PAO GHGsEF physical_unit
 
+
+
 Parameter WEB(flow,product,z);
+
 WEB(flow,product,'01_KOR') =  WEB_KOR(flow,product);
 WEB(flow,product,'02_CHN') =  WEB_CHN(flow,product);
 WEB(flow,product,'03_JPN') =  WEB_JPN(flow,product);
@@ -799,7 +802,7 @@ WEB(flow,product,'17_PAO') =  WEB_PAO(flow,product);
 execute_unload 'Input_WEB/WEB_2019_230425.gdx',
 *Sets
 WEB ;
-
+*$exit
 
 Parameter
  TCoke_Share(f_cokeoven,product,z)
@@ -900,7 +903,6 @@ display TCoke_Share, TBlast_Share ;
  Coal_DIO(p_coal,'18_TnD',z) = 0 ;
  Coal_DIO(p_coal,'19_eNuclear',z) = 0 ;
  Coal_DIO(p_coal,'20_eCoal',z) = -1*sum((f_elec), WEB(f_elec, p_coal, z));
- Coal_DIO(p_coal,'19_eNuclear',z) = 0 ;
  Coal_DIO(p_coal,'21_eGas',z) = 0 ;
  Coal_DIO(p_coal,'22_eOil',z) = 0 ;
  Coal_DIO(p_coal,'23_eWind',z) = 0 ;
