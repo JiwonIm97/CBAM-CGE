@@ -1,9 +1,0 @@
-par=sigma_KD  rng=PAR!A5:R27
-par=sigma_LD  rng=PAR!A30:R52
-par=sigma_X1  rng=PAR!A55:R76
-par=sigma_X2  rng=PAR!A79:R100
-par=sigma_X0  rng=PAR!A103:R125
-par=sigma_X3  rng=PAR!A128:R149
-par=sigma_y   rng=PAR!A152:R175
-par=PARZ      rng=PAR!A177:C194
-par=sigma_inv rng=PAR!A197:R219 Rdim=2 Cdim=1

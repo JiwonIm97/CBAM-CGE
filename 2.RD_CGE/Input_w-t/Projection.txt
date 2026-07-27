@@ -1,7 +1,0 @@
-par=GDP             rng=GDP_Projection!A1:CN18
-par=TOT_POP       rng=TOT_POP_Projection!A1:CN18
-par=AEEI             rng=AEEI!A1:CN18
-par=CTAX_145     rng=CTAX_145!A1:CN18
-par=CTAX_285     rng=CTAX_285!A1:CN18
-par=CTAX_425     rng=CTAX_425!A1:CN18
-par=CTAX_565     rng=CTAX_565!A1:CN18

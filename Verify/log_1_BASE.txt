@@ -1,0 +1,6 @@
+GDXDIFF          40.1.1 23eb37fb Aug 16, 2022          WEI x86 64bit/MS Window
+File1 : C:\Users\HOME\Desktop\CBAM\Output_w-1\1_BASE.gdx
+File2 : C:\Users\HOME\Desktop\CBAM_refactor\Output_w-1\1_BASE.gdx
+No differences found
+Output: Verify\diff_1_BASE.gdx
+GDXDiff finished

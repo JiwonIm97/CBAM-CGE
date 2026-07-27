@@ -1,0 +1,7 @@
+GDXDIFF          40.1.1 23eb37fb Aug 16, 2022          WEI x86 64bit/MS Window
+File1 : C:\Users\HOME\Desktop\CBAM\Output_w-1\5_CBAM_HH.gdx
+File2 : C:\Users\HOME\Desktop\CBAM_refactor\Output_w-1\5_CBAM_HH.gdx
+Summary of differences:
+valYG   Data are different
+Output: Verify\diff_5_CBAM_HH.gdx
+GDXDiff finished
