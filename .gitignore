@@ -1,0 +1,22 @@
+# Local input data and spreadsheet sources
+*.gdx
+*.har
+*.xls
+*.xlsx
+*.zip
+
+# Model execution products
+Output_w-1/
+*.lst
+*.log
+*.lxi
+*.g00
+*.g01
+*.pf
+Input_WEB/DATA_WEB_2023_read.txt
+
+# Editor and notebook state
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+Thumbs.db

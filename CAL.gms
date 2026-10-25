@@ -1,7 +1,5 @@
 * ==============================================================================
 * CAL.gms
-* 벤치마크 보정: 소득·세율·CES/CET/LES·CO2 (원본 L532-1061)
-* CBAM - modular refactor of 1_Static_Model_GTAP11b_BASE.gms
 * ==============================================================================
 
 * 4.1 Calculation of income and savings related variables and parameters
@@ -44,7 +42,6 @@
 *==============================================================================
  LDO(l,j,z)      = LDO(l,j,z)/WO(l,z);
  LDCO(j,z)       = SUM[l,LDO(l,j,z)];
- LDCO('01_AGRICULT','01_KOR')       = 1.629;
  LSO(l,z)        = SUM[j,LDO(l,j,z)];
  EXO(i,z,zj)     = [EXO(i,z,zj)-TIXO(i,z,zj)]/PEO(i,z,zj);
  EXTO(i,z)       = SUM[zj,EXO(i,z,zj)];
@@ -69,7 +66,7 @@
  XSTO(j,z)       = sum(i, XSO(j,i,z));
 
  IMO2(zj,z)      = sum(i,IMO(i,zj,z));
- 
+
  PO(i,z)         = [PETO(i,z)*EXTO(i,z)+PLO(i,z)*DSO_I(i,z)
                   +eO(z)*PWMGO(i)*MRGNO(i,z)]/XSO_I(i,z);
 
@@ -77,11 +74,22 @@
  PO3(i,j,z)$XSO(j,i,z) = 1;
 
  PIO(i,z)        = SUM[j$XSO(j,i,z),PO2(J,I,z)*XSO(j,i,z)]/XSO_I(i,z);
- PTO(j,z)        = SUM[i$XSO(j,i,z),PO2(j,i,z)*XSO(j,i,z)]/XSTO(j,z);
 
- PPO(j,z)        = [SUM[l,TIWO(l,j,z)+WO(l,z)*LDO(l,j,z)]
-                  +SUM[k,TIKO(k,j,z)+RKDO(k,j,z)]
-                  +SUM[nene,DIO(nene,j,z)]+SUM[ene,DIO(ene,j,z)]]/XSTO(j,z);
+
+* Default prices for inactive industries
+ PTO(j,z) = 1;
+ PPO(j,z) = 1;
+
+ PTO(j,z)$ACTIVE_J(j,z)
+    = SUM[i$XSO(j,i,z), PO2(j,i,z)*XSO(j,i,z)]
+      / XSTO(j,z);
+
+ PPO(j,z)$ACTIVE_J(j,z)
+    = ( SUM[l, TIWO(l,j,z)+WO(l,z)*LDO(l,j,z)]
+      + SUM[k, TIKO(k,j,z)+RKDO(k,j,z)]
+      + SUM[nene, DIO(nene,j,z)]
+      + SUM[ene, DIO(ene,j,z)] ) / XSTO(j,z);
+
 
  theta2(j,i,z)   = DSO(j,i,z)/sum(jj, DSO(jj,i,z));
 
@@ -117,52 +125,274 @@
 *==============================================================================
 * 4.9 CO2 emission
 *==============================================================================
-$INCLUDE Input_WEB\Static_DATA_WEB_2017.gms
+$INCLUDE Input_WEB\DATA_WEB_2023.gms
 
 Parameter
  CO2IO(product,j,z) ktCO2 emission for industry j sector
  CO2HO(product,z)   ktCO2 direct emission for residendital sector
  TCO2IO(j,z)        ktCO2 total emission for industry sector j in region z
- CO2ICO(i,zj)       carbon content for commodity i in region z (tCO2 per$) 
- CO2IDFactor(i,zj)  indirect carbon content for commodity i in region z (tCO2 per$) 
  TCO2IO2(i,zj)      Total CO2 emissions for commodity i in region zj
  XSTO2(i,zj)        Total output for commodity i in region zj
  CP0(z)             CBAM carbon price per ton CO2 ($ per tCO2)
  GWP(type)          Global Warming Potential (100-year AR5)
  ;
- 
+
  GWP('CO2EF') = 1;
  GWP('CH4EF') = 28;
  GWP('N2OEF') = 265;
 
-***Direct emissions
+*Direct emissions
  CO2IO(p_coal,j,z)$Coal_DIO(p_coal,j,z) = Coal_DIO(p_coal,j,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2IO(p_gas,j,z)$Gas_DIO(p_gas,j,z)  = Gas_DIO(p_gas,j,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2IO(p_oilproduct,j,z)$Oilp_DIO(p_oilproduct,j,z)  = Oilp_DIO(p_oilproduct,j,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
- 
+ CO2IO(p_oil,j,z)
+    = Oil_DIO(p_oil,j,z)
+      *41.868*GHGsEF(p_oil,'CO2EF')
+      *(44/12)*0.001*GWP('CO2EF');
+
+CO2HO(p_oil,z)
+    = Oil_CO(p_oil,z)
+      *41.868*GHGsEF(p_oil,'CO2EF')
+      *(44/12)*0.001*GWP('CO2EF');
  CO2HO(p_coal,z)$Coal_CO(p_coal,z) = Coal_CO(p_coal,z)*41.868*GHGsEF(p_coal,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2HO(p_gas,z)$Gas_CO(p_gas,z) = Gas_CO(p_gas,z)*41.868*GHGsEF(p_gas,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
  CO2HO(p_oilproduct,z)$Oilp_CO(p_oilproduct,z) = Oilp_CO(p_oilproduct,z)*41.868*GHGsEF(p_oilproduct,'CO2EF')*1*(44/12)*0.001*GWP('CO2EF') ;
 
-***Indirect emissions
- CO2IO(p_elec,j,z) = {sum((p_coal,elec),CO2IO(p_coal,elec,z))+sum((p_oilproduct,elec),CO2IO(p_oilproduct,elec,z))+sum((p_gas,elec),CO2IO(p_gas,elec,z))}*{sum(p_elecheat,Elec_DIO(p_elecheat,j,z))/sum((p_elecheat,jj),Elec_DIO(p_elecheat,jj,z))};
+*Indirect emissions
 
-***Total emissions
- TCO2IO(j,z)  = sum(product, CO2IO(product,j,z));
- 
-***carbon content
- XSTO2(i,zj)   = sum(j$(INDtoCOM(j,i)),XSTO(j,zj));
- TCO2IO2(i,z)  = sum(j$(INDtoCOM(j,i)),TCO2IO(j,z));  
- CO2IDFACTOR(i,zj)  = TCO2IO2(i,zj)/XSTO2(i,zj)*1e-7;
- CO2IDFACTOR(i3,zj) = 0 ;
- CP0(z)=0;
+* ======================================================================
+* Separate electricity and heat emissions.
+* Fixed benchmark factors; domestic average allocation approximation.
+* CHP allocation: energy-output shares, NOT regulatory certification.
+* ======================================================================
+
+SETS
+    cb_eh_flow(flow)
+    / f11_MAINELEC, f12_AUTOELEC,
+      f13_MAINCHP,  f14_AUTOCHP,
+      f15_MAINHEAT, f16_AUTOHEAT /
+
+    cb_chp_flow(flow)
+    / f13_MAINCHP, f14_AUTOCHP /
+
+    cb_auto_flow(flow)
+    / f12_AUTOELEC, f14_AUTOCHP, f16_AUTOHEAT /
+
+    cb_fossil(product)
+;
+
+cb_fossil(product)
+    = p_coal(product)
+      OR p_gas(product)
+      OR p_oil(product)
+      OR p_oilproduct(product);
+
+PARAMETERS
+    cb_web(flow,product,z)       "Original WEB data"
+    cb_ef(product)              "ktCO2 per ktoe"
+    cb_flow_co2(flow,z)         "Fuel-combustion CO2 by source, ktCO2"
+    cb_out_e(flow,z)            "Electricity output in balance rows, ktoe"
+    cb_out_h(flow,z)            "Heat output in balance rows, ktoe"
+    cb_e_share(flow,z)          "Electricity allocation share"
+
+    cb_pool_e(z)               "Electricity production CO2, ktCO2"
+    cb_pool_h(z)               "Heat production CO2, ktCO2"
+    cb_pool_auto_e(z)          "Autoproducer part of electricity pool"
+    cb_pool_auto_h(z)          "Autoproducer part of heat pool"
+
+    cb_use_e(z)                "Mapped electricity consumption, ktoe"
+    cb_use_h(z)                "Mapped heat consumption, ktoe"
+
+    cb_alloc_e(j,z)            "Electricity emissions allocated to industry"
+    cb_alloc_h(j,z)            "Heat emissions allocated to industry"
+    cb_alloc_e_hh(z)           "Electricity emissions allocated to households"
+    cb_alloc_h_hh(z)           "Heat emissions allocated to households"
+
+    CO2_DIRECT_IO(j,z)         "Direct fuel-combustion CO2, ktCO2"
+    CO2_IND_IO(j,z)            "Allocated electricity plus heat CO2"
+    CO2_IND_HO(z)              "Allocated household electricity plus heat CO2"
+    EH_EMIS_POOL(z)            "Electricity and heat production CO2"
+    EH_USE_TOTAL(z)            "Mapped electricity and heat consumption"
+
+    cb_int_comb(i,z)           "Fuel-combustion intensity, tCO2/USD"
+    cb_int_e(i,z)              "Allocated electricity intensity, tCO2/USD"
+    cb_int_h(i,z)              "Allocated heat intensity, tCO2/USD"
+    cb_include_e(i)            "Include electricity emissions in CBAM"
+    CO2CBAMFACTOR(i,z)         "Fixed CBAM assessment intensity, tCO2/USD"
+
+    chk_cb_source(z)           "New source total minus existing supply CO2"
+;
+
+cb_web(flow,product,z) = WEB(flow,product,z);
+* Use the SAME fossil-product coverage as existing direct emissions.
+cb_ef(product) = 0;
+cb_ef(product)$cb_fossil(product)
+    = 41.868 * GHGsEF(product,'CO2EF')
+      * (44/12) * 0.001 * GWP('CO2EF');
+
+cb_flow_co2(cb_eh_flow,z)
+    = SUM(product$cb_fossil(product),
+          MAX(0,-cb_web(cb_eh_flow,product,z))
+          * cb_ef(product));
+
+* These are electricity/heat outputs in the energy-balance rows.
+* Do NOT substitute f99_ELOUTPUT, which is reported in GWh.
+cb_out_e(cb_eh_flow,z)
+    = MAX(0,cb_web(cb_eh_flow,'p63_ELECTR',z));
+
+cb_out_h(cb_eh_flow,z)
+    = MAX(0,cb_web(cb_eh_flow,'p64_HEAT',z));
+
+cb_e_share(flow,z) = 0;
+cb_e_share('f11_MAINELEC',z) = 1;
+cb_e_share('f12_AUTOELEC',z) = 1;
+
+ABORT$(SUM((cb_chp_flow,z)$(
+       cb_flow_co2(cb_chp_flow,z)>0
+       AND cb_out_e(cb_chp_flow,z)
+         + cb_out_h(cb_chp_flow,z)<=0),1)>0)
+    "CHP fuel emissions exist but electricity/heat outputs are missing",
+    cb_flow_co2, cb_out_e, cb_out_h;
+
+cb_e_share(cb_chp_flow,z)$(
+    cb_out_e(cb_chp_flow,z)+cb_out_h(cb_chp_flow,z)>0)
+    = cb_out_e(cb_chp_flow,z)
+      /(cb_out_e(cb_chp_flow,z)+cb_out_h(cb_chp_flow,z));
+
+* Heat-only flows retain electricity share zero.
+cb_pool_e(z)
+    = SUM(cb_eh_flow,
+          cb_flow_co2(cb_eh_flow,z)*cb_e_share(cb_eh_flow,z));
+
+cb_pool_h(z)
+    = SUM(cb_eh_flow,
+          cb_flow_co2(cb_eh_flow,z)*(1-cb_e_share(cb_eh_flow,z)));
+
+* Source provenance only: do not add these pools a second time.
+cb_pool_auto_e(z)
+    = SUM(cb_auto_flow,
+          cb_flow_co2(cb_auto_flow,z)*cb_e_share(cb_auto_flow,z));
+
+cb_pool_auto_h(z)
+    = SUM(cb_auto_flow,
+          cb_flow_co2(cb_auto_flow,z)*(1-cb_e_share(cb_auto_flow,z)));
+
+CO2_DIRECT_IO(j,z)
+    = SUM(product$cb_fossil(product),CO2IO(product,j,z));
+
+EH_EMIS_POOL(z) = SUM(elec,CO2_DIRECT_IO(elec,z));
+
+chk_cb_source(z)
+    = cb_pool_e(z)+cb_pool_h(z)-EH_EMIS_POOL(z);
+
+ABORT$(SMAX(z,
+    ABS(chk_cb_source(z))/MAX(1,ABS(EH_EMIS_POOL(z))))>1e-8)
+    "Source split does not reproduce the existing supply emissions",
+    chk_cb_source, EH_EMIS_POOL;
+
+* Allocate electricity and heat separately to mapped domestic users.
+* Electricity and heat consumption: use the declared parameter domain.
+cb_use_e(z)
+    = SUM((p_elecheat,j)$p_elec(p_elecheat),
+          Elec_DIO(p_elecheat,j,z))
+    + SUM(p_elecheat$p_elec(p_elecheat),
+          Elec_CO(p_elecheat,z));
+
+cb_use_h(z)
+    = SUM((p_elecheat,j)$p_heat(p_elecheat),
+          Elec_DIO(p_elecheat,j,z))
+    + SUM(p_elecheat$p_heat(p_elecheat),
+          Elec_CO(p_elecheat,z));
+
+ABORT$(SUM(z$(
+       (cb_pool_e(z)>0 AND cb_use_e(z)<=0)
+    OR (cb_pool_h(z)>0 AND cb_use_h(z)<=0)),1)>0)
+    "Positive electricity/heat emissions without mapped consumption",
+    cb_pool_e, cb_pool_h, cb_use_e, cb_use_h;
+
+cb_alloc_e(j,z) = 0;
+cb_alloc_h(j,z) = 0;
+cb_alloc_e_hh(z) = 0;
+cb_alloc_h_hh(z) = 0;
+
+cb_alloc_e(j,z)$(cb_use_e(z)>0)
+    = cb_pool_e(z)
+    * SUM(p_elecheat$p_elec(p_elecheat),
+          Elec_DIO(p_elecheat,j,z))
+    / cb_use_e(z);
+
+cb_alloc_h(j,z)$(cb_use_h(z)>0)
+    = cb_pool_h(z)
+    * SUM(p_elecheat$p_heat(p_elecheat),
+          Elec_DIO(p_elecheat,j,z))
+    / cb_use_h(z);
+
+cb_alloc_e_hh(z)$(cb_use_e(z)>0)
+    = cb_pool_e(z)
+    * SUM(p_elecheat$p_elec(p_elecheat),
+          Elec_CO(p_elecheat,z))
+    / cb_use_e(z);
+
+cb_alloc_h_hh(z)$(cb_use_h(z)>0)
+    = cb_pool_h(z)
+    * SUM(p_elecheat$p_heat(p_elecheat),
+          Elec_CO(p_elecheat,z))
+    / cb_use_h(z);
+
+EH_USE_TOTAL(z) = cb_use_e(z)+cb_use_h(z);
+CO2_IND_IO(j,z) = cb_alloc_e(j,z)+cb_alloc_h(j,z);
+CO2_IND_HO(z) = cb_alloc_e_hh(z)+cb_alloc_h_hh(z);
+
+* Store electricity and heat in their respective product entries.
+CO2IO(p_elec,j,z) = cb_alloc_e(j,z);
+CO2IO(p_heat,j,z) = cb_alloc_h(j,z);
+
+TCO2IO(j,z) = CO2_DIRECT_IO(j,z)+CO2_IND_IO(j,z);
+
+XSTO2(i,z) = SUM(j$INDtoCOM(j,i),XSTO(j,z));
+TCO2IO2(i,z) = SUM(j$INDtoCOM(j,i),TCO2IO(j,z));
+
+cb_int_comb(i,z) = 0;
+cb_int_e(i,z) = 0;
+cb_int_h(i,z) = 0;
+
+cb_int_comb(i,z)$(XSTO2(i,z)>0)
+    = SUM(j$INDtoCOM(j,i),CO2_DIRECT_IO(j,z))
+      /XSTO2(i,z)*1e-7;
+
+cb_int_e(i,z)$(XSTO2(i,z)>0)
+    = SUM(j$INDtoCOM(j,i),cb_alloc_e(j,z))
+      /XSTO2(i,z)*1e-7;
+
+cb_int_h(i,z)$(XSTO2(i,z)>0)
+    = SUM(j$INDtoCOM(j,i),cb_alloc_h(j,z))
+      /XSTO2(i,z)*1e-7;
+
+* Aggregate-sector policy approximation:
+* chemicals proxy fertilisers; non-metallic minerals proxy cement.
+* This is not a CN-product-level coverage map.
+cb_include_e(i) = 0;
+cb_include_e('11_CHEMICAL') = 1;
+cb_include_e('12_NONMET') = 1;
+*화학, 비철금속에만 전력사용량 포함
+
+CO2CBAMFACTOR(i,z) = 0;
+CO2CBAMFACTOR(i,z)$I4(i)
+    = cb_int_comb(i,z)+cb_int_h(i,z)
+      + cb_include_e(i)*cb_int_e(i,z);
+
+CP0(z) = 0;
 
 *==============================================================================
 * 4.3.2 Calibration of other prices and revised volumes (part 2)
-*==============================================================================
- PDO(i,z)        = PLO(i,z)*(1+tticO(i,z));
- PMO(i,zj,z)     = eO(z)*(1+tticO(i,z))*(1+ttimO(i,zj,z))
-                   *(PWMO(i,zj,z)+SUM[ij,PWMGO(ij)*tmrg(ij,i,zj,z)]+CP0(zj)*CO2IDFACTOR(i,zj)*eO(z)*PWMO(i,zj,z));
+ PDO(i,z) = PLO(i,z)*(1+tticO(i,z));
+* Benchmark import price: ordinary taxes/margins plus CBAM charge
+PMO(i,zj,z)
+    = eO(z)*(1+tticO(i,z))*(1+ttimO(i,zj,z))
+      *(PWMO(i,zj,z)
+        +SUM(ij,PWMGO(ij)*tmrg(ij,i,zj,z)))
+    + (CP0(zj)*CO2CBAMFACTOR(i,zj)*eO(z)*PWMO(i,zj,z))
+      $(z3(z) AND I4(i) AND NOT SAMEAS(zj,z));
  PMTO(i,z)       = SUM[zj,PMO(i,zj,z)*IMO(i,zj,z)]/IMTO(i,z);
  PCO(i,z)        = [PMTO(i,z)*IMTO(i,z)+PDO(i,z)*DDO(i,z)]/QO(i,z);
  CO(i,z)         = CO(i,z)/PCO(i,z);
@@ -178,8 +408,17 @@ Parameter
 
  PO4(ene,j,z)    = PCO(ene,z);
 
- PCIO(j,z)       = SUM[nene,PCO(nene,z)*DIO(nene,j,z)]/CIO(j,z);
- PCEO(j,z)       = SUM[ene,PCO(ene,z)*DEO(ene,j,z)]/CEO(j,z) ; 
+
+ PCIO(j,z) = 1;
+ PCEO(j,z) = 1;
+
+ PCIO(j,z)$(ACTIVE_J(j,z) AND CIO(j,z) > 0)
+    = SUM[nene, PCO(nene,z)*DIO(nene,j,z)]
+      / CIO(j,z);
+
+ PCEO(j,z)$(ACTIVE_J(j,z) AND CEO(j,z) > 0)
+    = SUM[ene, PCO(ene,z)*DEO(ene,j,z)]
+      / CEO(j,z);
 
  WTIO(l,j,z)     = WO(l,z)*(1+ttiwO(l,j,z));
 
@@ -193,7 +432,7 @@ Parameter
  PKO(z) = 1;
 
 * From GTAP, we know KSTO.
- KSTO(z)         = KSTO(z)/PKO(z);  
+ KSTO(z)         = KSTO(z)/PKO(z);
 
 * Assuming a uniform depreciation rate for all types of capital and all industries:
  delta(z)        = DEPO(z)/[PKO(z)*KSTO(z)];
@@ -224,8 +463,10 @@ Parameter
 * 4.3.4 Calibration of other prices and revised volumes (part 4)
 *==============================================================================
  VAO(j,z)        = LDCO(j,z)+KDCO(j,z);
+ PVAO(j,z) = 1;
+ PVAO(j,z)$(ACTIVE_J(j,z) AND VAO(j,z) > 0)
+    = ( WCO(j,z)*LDCO(j,z) + RCO(j,z)*KDCO(j,z)) / VAO(j,z);
 
- PVAO(j,z)       = [WCO(j,z)*LDCO(j,z)+RCO(j,z)*KDCO(j,z)]/VAO(j,z);
 
  PIXGDPO(z)      = 1;
  PIXGDP_WO       = 1;
@@ -238,12 +479,33 @@ Parameter
 *==============================================================================
 * 4.4.1 Leontief functions
 *==============================================================================
- io(j,z)         = CIO(j,z)/XSTO(j,z) ;
- io2(j,z)        = CEO(j,z)/XSTO(j,z) ;
- v(j,z)          = VAO(j,z)/XSTO(j,z) ;
- v2(j,z)         = (CEO(j,z)+VAO(j,z))/XSTO(j,z) ;
- aij(nene,j,z)   = DIO(nene,j,z)/CIO(j,z);
- aij2(ene,j,z)   = DEO(ene,j,z)/CEO(j,z);
+
+ io(j,z)  = 0;
+ io2(j,z) = 0;
+ v(j,z)   = 0;
+ v2(j,z)  = 0;
+
+ aij(nene,j,z) = 0;
+ aij2(ene,j,z) = 0;
+
+ io(j,z)$ACTIVE_J(j,z)
+    = CIO(j,z)/XSTO(j,z);
+
+ io2(j,z)$ACTIVE_J(j,z)
+    = CEO(j,z)/XSTO(j,z);
+
+ v(j,z)$ACTIVE_J(j,z)
+    = VAO(j,z)/XSTO(j,z);
+
+ v2(j,z)$ACTIVE_J(j,z)
+    = (CEO(j,z)+VAO(j,z))/XSTO(j,z);
+
+ aij(nene,j,z)$(ACTIVE_J(j,z) AND CIO(j,z) > 0)
+    = DIO(nene,j,z)/CIO(j,z);
+
+ aij2(ene,j,z)$(ACTIVE_J(j,z) AND CEO(j,z) > 0)
+    = DEO(ene,j,z)/CEO(j,z);
+
 
 *==============================================================================
 * 4.4.2 Calibration of CET parameters
@@ -305,23 +567,38 @@ Parameter
                   /SUM[jj$XSO(jj,i,z),beta_X3(jj,i,z)*XSO(jj,i,z)**(-rho_X3(i,z))
                   ]**(-1/rho_X3(i,z));
 
- POWERQO(Z) = SUM(POWER, XSO(power,'18_ELEC',z));
 
  sigma_X4(z) = 2;
 
- rho_X4(z)   = (1-sigma_X4(z))/sigma_X4(z);
 
- beta_X4(power,z)
-               = [PO2(power,'18_ELEC',z)*XSO(power,'18_ELEC',z)**(1+rho_X4(z))]/
-                   SUM[power2$XSO(power2,'18_ELEC',z),PO2(power2,'18_ELEC',z)*XSO(power2,'18_ELEC',z)**(1+rho_X4(z))];
+POWERQO(z)
+    = SUM[power$ACTIVE_POWER(power,z),
+          XSO(power,'18_ELEC',z)];
 
- B_X4(z)     = POWERQO(Z)
-                  /SUM[power2$XSO(power2,'18_ELEC',z),beta_X4(power2,z)*XSO(power2,'18_ELEC',z)**(-rho_X4(z))
-                  ]**(-1/rho_X4(z));
+* sigma_X4 is specified in PAR.gms.
+rho_X4(z) = (1-sigma_X4(z))/sigma_X4(z);
 
- TnDShare(z) = XSO('18_TnD','18_ELEC',z) / XSO_I('18_ELEC',z);
+beta_X4(power,z) = 0;
 
- PPOWERO(z) = 1;
+beta_X4(power,z)$ACTIVE_POWER(power,z)
+    = (PO2(power,'18_ELEC',z)
+        *XSO(power,'18_ELEC',z)**(1+rho_X4(z)))
+      / SUM[power2$ACTIVE_POWER(power2,z),
+            PO2(power2,'18_ELEC',z)
+            *XSO(power2,'18_ELEC',z)**(1+rho_X4(z))];
+
+B_X4(z) = 1;
+
+B_X4(z)$(POWERQO(z) > 0)
+    = POWERQO(z)
+      / (SUM[power2$ACTIVE_POWER(power2,z),
+              beta_X4(power2,z)
+              *XSO(power2,'18_ELEC',z)**(-rho_X4(z))] )**(-1/rho_X4(z));
+
+TnDShare(z)
+    = XSO('18_TnD','18_ELEC',z)/XSO_I('18_ELEC',z);
+
+PPOWERO(z) = 1;
 
 *==============================================================================
 * 4.4.3.1 Composite good
@@ -347,12 +624,13 @@ Parameter
 *==============================================================================
 * 4.4.3.3 Composite capital
 *==============================================================================
- rho_KD(j,z)     = (1-sigma_KD(j,z))/sigma_KD(j,z);
+
+ rho_KD(j,z)$ACTIVE_J(j,z) = (1-sigma_KD(j,z))/sigma_KD(j,z);
 
  beta_KD(k,j,z)$KDO(k,j,z)
                  = [RTIO(k,j,z)*KDO(k,j,z)**(1+rho_KD(j,z))]/
                    SUM[kj$KDO(kj,j,z),RTIO(kj,j,z)*KDO(kj,j,z)**(1+rho_KD(j,z))];
-                   
+
  B_KD(j,z)$KDCO(j,z)
                  = KDCO(j,z)/{SUM[k$KDO(k,j,z),beta_KD(k,j,z)*KDO(k,j,z)
                    **(-rho_KD(j,z))]**(-1/rho_KD(j,z))};
@@ -360,8 +638,9 @@ Parameter
 *==============================================================================
 * 4.4.3.4 Composite labor
 *==============================================================================
- rho_LD(j,z)     = (1-sigma_LD(j,z))/sigma_LD(j,z);
- 
+
+ rho_LD(j,z)$ACTIVE_J(j,z)   = (1-sigma_LD(j,z))/sigma_LD(j,z);
+
  beta_LD(l,j,z)$LDO(l,j,z)  = [WTIO(l,j,z)*LDO(l,j,z)**(1+rho_LD(j,z))]/
                   SUM[lj$LDO(lj,j,z),WTIO(lj,j,z)*LDO(lj,j,z)
                    **(1+rho_LD(j,z))];
@@ -372,7 +651,8 @@ Parameter
 *===============================================================================
 * Composite E
 *===============================================================================
- rho_ENER(j,z)   = (1-sigma_ENER(j,z))/sigma_ENER(j,z);
+
+ rho_ENER(j,z)$ACTIVE_J(j,z) = (1-sigma_ENER(j,z))/sigma_ENER(j,z);
 
  beta_ENER(ene,j,z)$DEO(ene,j,z)
                  = [PO4(ene,j,z)*DEO(ene,j,z)**(1+rho_ENER(j,z))]/
@@ -385,7 +665,7 @@ Parameter
 * 4.4.3.5 Value added
 *==============================================================================
  sigma_VA('10_PETROLCOAL',z) = 1.260;
- rho_VA(j,z)     = (1-sigma_VA(j,z))/sigma_VA(j,z);
+ rho_VA(j,z)$ACTIVE_J(j,z) = (1-sigma_VA(j,z))/sigma_VA(j,z);
 
  beta_VA(j,z)$KDCO(j,z)
                  = WCO(j,z)*LDCO(j,z)**(rho_VA(j,z)+1)/
@@ -401,10 +681,11 @@ Parameter
 *==============================================================================
 * Composite KLE
 *==============================================================================
- KLEO(j,z)       = CEO(j,z) + VAO(j,z) ; 
- PKLEO(j,z)      = [PCEO(j,z)*CEO(j,z)+PVAO(j,z)*VAO(j,z)]/KLEO(j,z);
- rho_KLE(j,z)    = (1-sigma_KLE(j,z))/sigma_KLE(j,z);
-
+ KLEO(j,z)       = CEO(j,z) + VAO(j,z) ;
+ PKLEO(j,z) = 1;
+ PKLEO(j,z)$(ACTIVE_J(j,z) AND KLEO(j,z) > 0)
+    = (PCEO(j,z)*CEO(j,z)+ PVAO(j,z)*VAO(j,z)) / KLEO(j,z);
+ rho_KLE(j,z)$ACTIVE_J(j,z) = (1-sigma_KLE(j,z))/sigma_KLE(j,z);
  beta_KLE(j,z)$KLEO(j,z)
                  = PVAO(j,z)*VAO(j,z)**(rho_KLE(j,z)+1)/
                   {PVAO(j,z)*VAO(j,z)**(rho_KLE(j,z)+1)+
@@ -414,7 +695,6 @@ Parameter
                    /{[beta_KLE(j,z)*VAO(j,z)**(-rho_KLE(j,z))+
                    (1-beta_KLE(j,z))*CEO(j,z)**(-rho_KLE(j,z))
                    ]**(-1/rho_KLE(j,z))};
-
 *==============================================================================
 * 4.4.4 Calibration of LES parameters
 *==============================================================================
@@ -525,20 +805,16 @@ Parameters
  CTAX0(z) = 0;
  TCTAX0(z) = 0;
 
- TCBAMO(z3) = sum((i,zj), CP0(zj)*CO2IDFACTOR(i,zj)*IMO(i,zj,z3)*PWMO(i,zj,z3));
- 
-*--- [refactor] 지분 정규화 오류 수정: sum(jj,XSTO(j,z)) 는 제어인덱스 jj 를 쓰지 않아
-*    card(j)*XSTO(j,z) 가 되었음. 보조 대상집합(eNFs) 내부 금액지분으로 재정의.
+* Benchmark CBAM revenue: same coverage and charge as EQ16_4
+TCBAMO(z)
+    = SUM((i,zj)$(z3(z) AND I4(i)
+                  AND NOT SAMEAS(zj,z)
+                  AND IMO(i,zj,z)>0),
+          CP0(zj)*CO2CBAMFACTOR(i,zj)*eO(z)
+          *IMO(i,zj,z)*PWMO(i,zj,z));
+
+
  ttip_shareO(j,z)$(eNFs(j) and sum(jj$eNFs(jj), XSTO(jj,z)*PPO(jj,z)))
                   = XSTO(j,z)*PPO(j,z)/sum(jj$eNFs(jj), XSTO(jj,z)*PPO(jj,z));
- deltattipO(j,z)$(XSTO(j,z)*PPO(j,z))
-                  = -ttip_shareO(j,z)*TCBAMO(z)/(XSTO(j,z)*PPO(j,z));
-
-*--- [refactor] 위와 동일한 지분 오류 + 연산자 우선순위 오류 수정
-*    (원본: /WO*LDO -> (rev/W)*LD 로 계산되어 차원 불일치)
  ttiw_shareO(l,j,z)$(J11(j) and SUM[(lj,jj)$J11(jj), WO(lj,z)*LDO(lj,jj,z)])
                   = WO(l,z)*LDO(l,j,z)/SUM[(lj,jj)$J11(jj), WO(lj,z)*LDO(lj,jj,z)];
- deltattiwO(l,j,z)$(WO(l,z)*LDO(l,j,z))
-                  = -ttiw_shareO(l,j,z)*TCBAMO(z)/(WO(l,z)*LDO(l,j,z));
-
-execute_unload 'Calibration';

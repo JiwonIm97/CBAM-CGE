@@ -1,22 +1,10 @@
 * ==============================================================================
 * Declare_Results.gms
-* 리포팅 파라미터 val* 선언 (원본 L1062-1221)
-* CBAM - modular refactor of 1_Static_Model_GTAP11b_BASE.gms
 * ==============================================================================
-
 
 
 *Reporting
 PARAMETER
- ElecTDI(z)                   Total electricity consumption in region z by all industries
- ElecRI(j,z)                  Share of electricity used by industry j in total electricity consumption in region z
- valCO2INDI(product,j,z,sim)  Indirect CO2 emission by product for energy use industry j in region z (KtCO2 per $1)
- valCO2INDNE(product,j,z,sim) Indirect CO2 emission by product for non energy use industry j in region z
- valCO2INDI2(j,z,sim)         Indirect CO2 emission for energy use industry j in region z
- valCO2INDNE2(j,z,sim)        Indirect CO2 emission for non energy use industry j in region z
- valTCO2INDI(z,sim)           Indirect CO2 emission for energy use industry in region z
- valTCO2INDNE(z,sim)          Indirect CO2 emission for non energy use industry in region z
- valCO2C(j,z,sim)             Carbon content of industry j in region z  
  valTFC_com(product,z,sim)    Total final consumption by energy commodities
  valTFC_ind(j,z,sim)          Total final consumption by industry
  valTFC(z,sim)                Total final consumption in region z
@@ -26,10 +14,6 @@ PARAMETER
  valCO2I(product,j,z,sim)     Reporting variable for Industry CO2 emission
  valCO2NE(product,j,z,sim)    Reporting variable for Industry CO2 non-energy emission
  valCO2H(product,z,sim)       Reporting variable for Household CO2 emission
- valCH4I(product,j,z,sim)     Reporting variable for Industry CH4 emission
- valCH4H(product,z,sim)       Reporting variable for Household CH4 emission
- valN2OI(product,j,z,sim)     Reporting variable for Industry N2O emission
- valN2OH(product,z,sim)       Reporting variable for Household N2O emission
  valCO2I2(j,z,sim)            Reporting variable for Total industry CO2 emission
  valCO2NE2(j,z,sim)           Reporting variable for Total industry CO2 non-energy emission
  valTCO2I(z,sim)              Reporting variable for Total regional industry CO2
@@ -107,7 +91,7 @@ PARAMETER
  valPMT(i,z,sim)              Price of composite commodity i imported by region z (including all taxes duties and margins)
  valPP(j,z,sim)               Unit cost of industry j in region z including taxes directly related to the use of capital and labor but excluding other taxes on production
  valPVA(j,z,sim)              Price of industry j value added in region z (including taxes on production directly related to the use of capital and labor)
- valPKLE(j,z,sim)             Price of industry j KLE in region z 
+ valPKLE(j,z,sim)             Price of industry j KLE in region z
  valPWM(i,zj,z,sim)           World price of commodity i imported from country zj by region z (expressed in international currency)
  valPWMG(i,sim)               World price of margin i (expressed in international currency)
  valPWX(i,z,zj,sim)           World price of commodity i exported to country zj by region z (expressed in international currency)
@@ -149,7 +133,6 @@ PARAMETER
  valWTI(l,j,z,sim)            Wage rate paid z by industry j for type l labor in region including payroll taxes
  valXS(j,i,z,sim)             Total output of industry j by commodity i in region z
  valXS_I(i,z,sim)             Total output of commodity i in region z
- valXST(j,z,sim)              Total output of industry j in region z
  valYDH(z,sim)                Household disposable income in region z
  valYG(z,sim)                 Total government income in region z
  valYH(z,sim)                 Household total income in region z
@@ -160,5 +143,26 @@ PARAMETER
  valgamma_LES(i,z,sim)        Reporting variable for gamma_LES
  valLEON(z,sim)               Reporting variable for Walras law verification (LEON)
 ;
-*$EXIT
 
+*==============================================================================
+* CBAM 환류액, 사용액 및 회계 검증
+*==============================================================================
+
+PARAMETERS
+    valRCY_FLOW(z,zj,sim) 지역 간 배정액: 국제 기준통화 표시
+    valRCY_IN(z,sim) 국내 배정분을 포함한 총수령액: 수령지역 통화 표시
+    valRCY_INF(z,sim) 해외에서 받은 환류액: 수령지역 통화 표시
+    valRCY_OUTF(z,sim) 해외로 보낸 환류액: 징수지역 통화 표시
+    valRCY_HH(z,sim) CBAM 세수의 가계 이전액
+    valRCY_REN(z,sim) 실제 재생에너지 생산세 감면액
+    valRCY_LAB(z,sim) 실제 노동세 감면액
+    valRCY_GOV(z,sim) 수령액 중 정부에 유보하는 금액
+    valRCY_REN_ERR(z,sim) 실제 REN 지원액과 예정 배정액의 차이
+    valRCY_LAB_ERR(z,sim) 실제 LAB 지원액과 예정 배정액의 차이
+    valRCY_BUDGET_ERR(z,sim) 총사용액과 총수령액의 차이
+    valRCY_CHECK(sim) 수령액 규모로 정규화한 최대 환류 회계 오차
+    valModelStat(sim) 모형 해 상태
+    valSolveStat(sim) 솔버 종료 상태
+    valNumDepnd(sim)  종속 방정식 수
+;
+*$EXIT

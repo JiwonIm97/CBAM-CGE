@@ -8,3 +8,6 @@ $batinclude "Scenario/RunScenario.gms" %RUN_S1_CBAM_EU%    S1_CBAM_EU.gms     2_
 $batinclude "Scenario/RunScenario.gms" %RUN_S2_CBAM_RENEW% S2_CBAM_RENEW.gms  3_CBAM_RENEW
 $batinclude "Scenario/RunScenario.gms" %RUN_S3_CBAM_LAB%   S3_CBAM_LAB.gms    4_CBAM_LAB
 $batinclude "Scenario/RunScenario.gms" %RUN_S4_CBAM_HH%    S4_CBAM_HH.gms     5_CBAM_HH
+$ifthen.cbamgrid %RUN_CBAM_GRID% == 1
+$include "Scenario/Run_Policy_Grid.gms"
+$endif.cbamgrid

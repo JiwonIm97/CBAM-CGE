@@ -1,7 +1,6 @@
+
 * ==============================================================================
 * PAR.gms
-* 파라미터 선언 + GTAP GDX 로드 + 외생가격 (원본 L189-531)
-* CBAM - modular refactor of 1_Static_Model_GTAP11b_BASE.gms
 * ==============================================================================
 
 *==============================================================================
@@ -47,7 +46,7 @@ PARAMETER
  io2(j,z)            Technical coefficient for total energy intermediate consumption
  v(j,z)              Value added coefficient (Leontief)
  v2(j,z)             KLE composite coefficient (Leontief)
- kmob                Capital mobility flag 
+ kmob                Capital mobility flag
  RES                 Scaling factor for GTAP data
  rho_KD(j,z)         Elasticity parameter (CES - composite capital)
  rho_LD(j,z)         Elasticity parameter (CES - composite labor)
@@ -75,7 +74,6 @@ PARAMETER
  sigma_Y(i,z)        Income elasticity of household consumption
  tmrg(i,ij,zj,z)     Transport margin rate
  TnDShare(z)         Transmission & Distribution share in electricity
- PowerShare(z)       Generation share in electricity
  theta2(j,i,z)       Initial share of industry j in commodity i output
 
 *==============================================================================
@@ -113,7 +111,7 @@ PARAMETER
  KDCO(j,z)           Demand for composite capital by industry j in region z
  KSO(k,z)            Supply of type k capital in region z
  KSTO(z)             Total supply of capital in region z
- LDO(l,j,z)          Demand for type l labor by industry j in region z  
+ LDO(l,j,z)          Demand for type l labor by industry j in region z
  LDCO(j,z)           Demand for composite labor by industry j in region z
  LSO(l,z)            Supply of type l labor in region z
  MRGNO(i,z)          Domestic production of commodity i in region z exported as international margin services
@@ -218,28 +216,19 @@ PARAMETER
  ttipO(j,z)          Tax rate on the production of industry j
  ttiwO(l,j,z)        Tax rate on type l worker compensation in industry j
  ttixO(i,z,zj)       Export tax rate on exported commodity i
-      
-*==============================================================================
-* 2.2.5 Utility Variable
-*==============================================================================
- UUO(z)              Utility of region z
- epO(z)              Expenditure function of region z
- sigma_w(i,z)        Share parameter in utility function
 
 *==============================================================================
-* 2.2.6 Tax rebate 
+* 2.2.6 Tax rebate
 *==============================================================================
  ttip_shareO(j,z)    Industry output share
- deltattipO(j,z)     Production tax reduction due to subsidies in industry j
  ttiw_shareO(l,j,z)  Labor share
- deltattiwO(l,j,z)   Labor tax reduction due to subsidies in industry j
 
 *==============================================================================
-* 2.2.7 CBAM 
+* 2.2.7 CBAM
 *==============================================================================
  TCBAMO(z)           Total CBAM imposition of destination region z
- TMO(z)              Total taxes and duties on imports of destination region z
  ;
+
 
 Scalar
  Tiny small figure to avoid division by zero / 0.000000000001/ ;
@@ -247,24 +236,32 @@ Scalar
 *==============================================================================
 * 3 Data
 *==============================================================================
-* 3.1 Data input from GTAP8.1
+* 3.1 Data input from aggregated GTAP12
 *==============================================================================
-* 3.1.1 Reading data aggregated with DATA_AGG-2007.gms
+* 3.1.1 Reading DATA_AGG_GTAP12.gdx
 *==============================================================================
-$GDXIN Input_w-1\DATA_AGG_250804.gdx
+$GDXIN Input_w-1\DATA_AGG_GTAP12.gdx
 $LOAD CO, CGO, DDO, DEPO, DIO, DSO, DSO_I, EXO, IMO, INVO, KSTO, LDO, MRGNO, XSO, XSO_I, XSTO, RKDO
 $LOAD POPO, TDHO, TICO, TIKO, TIMO, TIPO, TIWO, TIXO, tmrg
 $LOAD sigma_M1, sigma_M2, sigma_VA
 
-display sigma_M1, sigma_M2, sigma_VA ;
+$GDXIN
 
-sigma_M1('04_GAS',Z) = 6;
+*==============================================================================
+* Benchmark activity domains
+*==============================================================================
+
+ACTIVE_J(j,z)   = YES$(XSTO(j,z) > 0);
+INACTIVE_J(j,z) = YES$(XSTO(j,z) = 0);
+ACTIVE_POWER(j,z) =
+    YES$(POWER(j) AND ACTIVE_J(j,z)
+         AND XSO(j,'18_ELEC',z) > 0);
 
 *==============================================================================
 * 3.1.2 Rescaling the variables
 *==============================================================================
-* GTAP 8.1 data are in millions of (2004 and 2007) US dollars
-* With RES = 10000, model results are in tens of billions (10G$)
+* GTAP12 monetary data are in million USD.
+* RES = 10000 converts monetary values to units of 10 billion USD.
 RES = 10000;
 
 * NOTE: In GTAP parlance, "agents' prices" are prices paid by buyers, and
@@ -307,30 +304,45 @@ eta = 1;
 *==============================================================================
 PARAMETER
  PARZ Parameter array for storing external parameter values;
-
-*$CALL gdxxrw Input_w-1\VAL_PAR_250805.xls @Input_w-1\VAL_PAR_250805.txt trace=0 output=Input_w-1\VAL_PAR_250805.gdx
-$GDXIN Input_w-1\VAL_PAR_250805.gdx
-$LOAD sigma_KD, sigma_LD, sigma_KLE, sigma_X1, sigma_X2, sigma_X3, sigma_X0, sigma_y, PARZ
+$if not set REBUILD_XLS $setglobal REBUILD_XLS 1
+$ifthen.xlspar %REBUILD_XLS% == 1
+$CALL.checkErrorLevel gdxxrw "Input_w-1\PAR.xls" @"Input_w-1\PAR.txt" output="Input_w-1\PAR.gdx" trace=3 log="Input_w-1\PAR_import.log"
+$endif.xlspar
+$GDXIN Input_w-1\PAR.gdx
+$LOADDC sigma_KD sigma_LD sigma_KLE sigma_X1 sigma_X2 sigma_X3 sigma_X0 sigma_y PARZ
+$GDXIN
 
 *------------------------------------------------------------------------------
- sigma_KD(j,z)   = 2*sigma_VA(j,z);
+* Elasticity * = robustness test needed!
+
+* Preserve the existing elasticity rule for active industries.
+ sigma_KD(j,z)$ACTIVE_J(j,z) = 2*sigma_VA(j,z);
+ sigma_LD(j,z)$ACTIVE_J(j,z) = 2*sigma_VA(j,z);
+* No behavioral elasticities are assigned to absent activities.
+ sigma_KD(j,z)$INACTIVE_J(j,z) = 0;
+ sigma_LD(j,z)$INACTIVE_J(j,z) = 0;
+
  sigma_M1('04_GAS',Z) = 6;
  sigma_M2('03_OIL',Z) = 2;
  sigma_M2('04_GAS',Z) = 2;
  sigma_X2(i,Z)  = 2;
  sigma_X4(z)    = 2;
- sigma_LD(j,z)   = 2*sigma_VA(j,z);
 
 *------------------------------------------------------------------------------
 * CES - composite KLE, KE, ENER
  sigma_KLE('10_PETROLCOAL',z)  = 0.9 ;
  sigma_ENER(j,z) = 0.9 ;
 
+* Inactive entries are unused placeholders, not Leontief assumptions.
+sigma_VA(j,z)$INACTIVE_J(j,z)   = 0;
+sigma_KLE(j,z)$INACTIVE_J(j,z)  = 0;
+sigma_ENER(j,z)$INACTIVE_J(j,z) = 0;
+
 *------------------------------------------------------------------------------
 * LES parameters - Frisch
  frisch(Z3)   = -1.1;
  frisch(Z4)   = -1.3;
- frisch(z5)  = -1.5;
+ frisch(z5)   = -1.5;
 
 *------------------------------------------------------------------------------
 * Slopes of taxation functions
@@ -343,6 +355,7 @@ $LOAD sigma_KD, sigma_LD, sigma_KLE, sigma_X1, sigma_X2, sigma_X3, sigma_X0, sig
  PLO(i,z)        = 1;
  PWMGO(i)        = 1;
  WO(l,z)         = 1;
+
 
 *==============================================================================
 * 4 Calibration
