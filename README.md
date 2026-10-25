@@ -79,10 +79,3 @@ Grid outcomes are written to `Output_w-1/CBAM_GRID_100.gdx`.
 missing cases. Monetary model quantities use USD 10 billion units, and grid
 combustion CO2 is reported in ktCO2. Industry/technology detail for figure
 production is not exported by the policy grid.
-
-## Attribution
-
-Original author and license notices in the source files are preserved.
-The underlying model is attributed in those notices to Veronique Robichaud,
-Andre Lemelin, Helene Maisonnave, and Bernard Decaluwe, with a CC BY-NC-SA 3.0
-notice. Dataset redistribution is separate from code distribution.
